@@ -1,0 +1,15 @@
+# quick_sort-785
+# quick_sort-785-2
+TARGET := quick_sort-785-2
+$(TARGET): $(TARGET).c build
+	gcc -o build/$(TARGET) $(TARGET).c
+run:${TARGET}
+	./build/$(TARGET)
+debug:build
+	gcc -g -o build/debug/$(TARGET) $(TARGET).c
+	gdb build/debug/$(TARGET)
+
+build:
+	mkdir -p build
+	mkdir -p build/debug
+.PHONY:build
