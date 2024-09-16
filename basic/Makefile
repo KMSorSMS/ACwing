@@ -1,7 +1,8 @@
 # quick_sort-785
 # quick_sort-785-2
 # quick_select-786
-TARGET := quick_select-786
+# merge_sort-787
+TARGET := merge_sort-787
 $(TARGET): $(TARGET).c build
 	gcc -o build/$(TARGET) $(TARGET).c
 run:${TARGET}
