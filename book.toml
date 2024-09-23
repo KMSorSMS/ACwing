@@ -1,0 +1,18 @@
+[book]
+authors = ["liam"]
+language = "zh-CN"
+title = "acwing 题目tips"
+src = "docs"
+
+[output.html]
+git-repository-url = "https://github.com/KMSorSMS/ACwing"
+edit-url-template = "https://github.com/KMSorSMS/ACwing/edit/main/{path}"
+
+[output.html.playground]
+editable = true
+copy-js = true
+# line-numbers = true
+
+[output.html.fold]
+enable = true
+level = 0
