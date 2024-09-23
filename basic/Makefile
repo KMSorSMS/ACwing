@@ -2,7 +2,8 @@
 # quick_sort-785-2
 # quick_select-786
 # merge_sort-787
-TARGET := merge_sort-787
+# reverse_pairs-788
+TARGET := reverse_pairs-788
 $(TARGET): $(TARGET).c build
 	gcc -o build/$(TARGET) $(TARGET).c
 run:${TARGET}
@@ -14,4 +15,6 @@ debug:build
 build:
 	mkdir -p build
 	mkdir -p build/debug
-.PHONY:build
+format:
+	clang-format -i *.c
+.PHONY:build format
