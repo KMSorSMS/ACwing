@@ -4,8 +4,9 @@
 # merge_sort-787
 # reverse_pairs-788
 # number_range-789
+# cubic_equation-790
 
-TARGET := number_range-789
+TARGET := cubic_equation-790
 $(TARGET): $(TARGET).c build
 	gcc -o build/$(TARGET) $(TARGET).c
 run:${TARGET}
