@@ -3,7 +3,9 @@
 # quick_select-786
 # merge_sort-787
 # reverse_pairs-788
-TARGET := reverse_pairs-788
+# number_range-789
+
+TARGET := number_range-789
 $(TARGET): $(TARGET).c build
 	gcc -o build/$(TARGET) $(TARGET).c
 run:${TARGET}
