@@ -5,8 +5,10 @@
 # reverse_pairs-788
 # number_range-789
 # cubic_equation-790
+# high_precision_add-791
+# high_precision_sub-792
 
-TARGET := cubic_equation-790
+TARGET := high_precision_sub-792
 $(TARGET): $(TARGET).c build
 	gcc -o build/$(TARGET) $(TARGET).c
 run:${TARGET}

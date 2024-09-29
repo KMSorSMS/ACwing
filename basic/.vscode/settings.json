@@ -2,5 +2,6 @@
     "github.copilot.enable": {
         "c": false,
         "cpp": false
-    }
+    },
+    "rust-analyzer.checkOnSave": true
 }
