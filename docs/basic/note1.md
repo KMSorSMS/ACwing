@@ -31,3 +31,5 @@
 while(index + 1 != M - 1 && long_int_r[index + 1] == '0') index++;
 ```
 并且加减法里面，都需要注意输入到数组里面，高位是放在低地址的，所以后面对元素处理的时候数组索引很重要
+
+### 793-high_precision_mul
