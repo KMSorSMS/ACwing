@@ -9,8 +9,10 @@
 # high_precision_sub-792
 # high_precision_mul-793
 # high_precision_mul_re-793
+# high_precision_div-794
+# high_precision_div_re-794
 
-TARGET := high_precision_mul_re-793
+TARGET := high_precision_div_re-794
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 $(TARGET): $(TARGET_file) build
 	g++ -o build/$(TARGET) $(TARGET_file)
