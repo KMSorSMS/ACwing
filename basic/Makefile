@@ -13,8 +13,9 @@
 # high_precision_div_re-794
 # prefix_sum-795
 # matrix_sum-796
+# difference-797
 
-TARGET := matrix_sum-796
+TARGET := difference-797
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 $(TARGET): $(TARGET_file) build
 	g++ -o build/$(TARGET) $(TARGET_file)
