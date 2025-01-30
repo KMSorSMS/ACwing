@@ -15,11 +15,13 @@
 # matrix_sum-796
 # difference-797
 # difference_matrix-798
+# longest_non_repeat-799
+# longest_non_repeat_imp-799
 
-TARGET := difference_matrix-798
+TARGET := longest_non_repeat_imp-799
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 $(TARGET): $(TARGET_file) build
-	g++ -o build/$(TARGET) $(TARGET_file)
+	g++ -std=c++17 -o build/$(TARGET) $(TARGET_file)
 run:${TARGET}
 	./build/$(TARGET)
 debug:build

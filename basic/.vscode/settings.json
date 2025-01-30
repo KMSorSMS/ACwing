@@ -10,5 +10,8 @@
         ".gdb": "shell",
         "*.cu": "cuda",
         "algorithm": "cpp"
-    }
+    },
+    "clangd.fallbackFlags": [
+        "--std=c++17"
+    ]
 }
