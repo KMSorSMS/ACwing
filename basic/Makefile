@@ -19,7 +19,8 @@
 # longest_non_repeat_imp-799
 # array_target_sum-800
 # sub_seq-2816
-TARGET := sub_seq-2816
+# binary_ones-801
+TARGET := binary_ones-801
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 $(TARGET): $(TARGET_file) build
 	g++ -std=c++17 -o build/$(TARGET) $(TARGET_file)
