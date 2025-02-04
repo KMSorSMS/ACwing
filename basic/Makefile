@@ -23,8 +23,9 @@
 # interval_sum-802
 # interval_sum_imp-802
 # interval_sum_faster-802
+# interval_combine-803
 
-TARGET := interval_sum_faster-802
+TARGET := interval_combine-803
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
