@@ -15,11 +15,9 @@ int main()
 	for(int i = str_A.size() - 1; i >= 0; i--) A.push_back(str_A[i] - '0');
 	for(int j = str_B.size() - 1; j >= 0; j--) B.push_back(str_B[j] - '0');
 	// then we do multiplication
-	std::vector<int> C = high_mul_high(A,B);
+	std::vector<int> C = high_mul_high(A, B);
 	// print it out
-	for(int i=0;i<C.size();i++){
-		std::cout << C[i];
-	}
+	for(int i = 0; i < C.size(); i++) { std::cout << C[i]; }
 	std::cout << std::endl;
 }
 
@@ -39,10 +37,8 @@ std::vector<int> high_mul_high(std::vector<int> A, std::vector<int> B)
 		C[i] = C[i] % 10;
 	}
 	// handle the preceding zero
-	while(C.size() > 1 && C.back() == 0){
-		C.pop_back();
-	}
+	while(C.size() > 1 && C.back() == 0) { C.pop_back(); }
 	// then we need to reverse C to make the lower position the higher number
-	std::reverse(C.begin(),C.end());
+	std::reverse(C.begin(), C.end());
 	return C;
 }

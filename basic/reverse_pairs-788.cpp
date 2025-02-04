@@ -12,7 +12,7 @@ void merge_sort_2(int left, int right)
 	merge_sort_2(left, mid), merge_sort_2(mid + 1, right);
 	// 我们需要left-mid插入到mid+1-right这个区间里面，并且记录逆序个数
 	int k = 0;
-    unsigned long local_count = 0;
+	unsigned long local_count = 0;
 	mid++;
 	while(left <= mid_cp && mid <= right)
 	{
@@ -46,5 +46,5 @@ int main()
 	// 打印答案
 	printf("%ld\n", count);
 	// for(int i = 0; i < n; i++) printf("%d ", p[i]);
-    // printf("\n");
+	// printf("\n");
 }

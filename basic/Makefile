@@ -20,9 +20,15 @@
 # array_target_sum-800
 # sub_seq-2816
 # binary_ones-801
-# interval_sum
-TARGET := interval_sum
+# interval_sum-802
+# interval_sum_imp-802
+# interval_sum_faster-802
+
+TARGET := interval_sum_faster-802
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
+# # debug print Target_file
+# $(info "debug print TARGET_file")
+# $(info $(TARGET_file))
 $(TARGET): $(TARGET_file) build
 	g++ -std=c++17 -o build/$(TARGET) $(TARGET_file)
 run:${TARGET}
@@ -35,5 +41,11 @@ build:
 	mkdir -p build
 	mkdir -p build/debug
 format:
-	clang-format -i *.c
+	clang-format -i *.cpp
+change_to_cpp:
+	find . -type f -name "*.c" -exec bash -c 'mv "$0" "${0%.c}.cpp"' {} \;
+git:
+	git add .
+	git commit -m ":zap: "
+	git commit --amend 
 .PHONY:build format

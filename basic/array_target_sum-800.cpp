@@ -37,16 +37,15 @@ int main()
 	for(int i = 0; i < n; i++) { std::cin >> A[i]; }
 	for(int j = 0; j < m; j++) { std::cin >> B[j]; }
 	int a = 0, b = m - 1;
-	while(b >= 0 && a <= m - 1) { 
-        if(A[a] + B[b] == x){
-            printf("%d %d\n",a,b);
-            break;
-        }
-        if(A[a] + B[b] > x){
-            b--;
-        }else{
-            a++;
-        }
-    }
+	while(b >= 0 && a <= m - 1)
+	{
+		if(A[a] + B[b] == x)
+		{
+			printf("%d %d\n", a, b);
+			break;
+		}
+		if(A[a] + B[b] > x) { b--; }
+		else { a++; }
+	}
 	return 0;
 }
