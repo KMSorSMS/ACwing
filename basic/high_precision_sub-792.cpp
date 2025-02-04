@@ -68,7 +68,7 @@ int main()
 			}
 			long_int_r[i] = tmp + '0';
 		}
-		while(index + 1 != M - 1 && long_int_r[index + 1] == '0') index++,i++;
+		while(index + 1 != M - 1 && long_int_r[index + 1] == '0') index++, i++;
 		long_int_r[i] = '-';
 		index--;
 	}

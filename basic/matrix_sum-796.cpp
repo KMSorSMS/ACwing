@@ -26,6 +26,7 @@ int main()
 	{
 		std::cin >> lux >> luy >> rdx >> rdy;
 		std::cout << (matrix[rdx][rdy] - matrix[rdx][luy - 1] - matrix[lux - 1][rdy] +
-					  matrix[lux - 1][luy - 1]) << std::endl;
+					  matrix[lux - 1][luy - 1])
+				  << std::endl;
 	}
 }

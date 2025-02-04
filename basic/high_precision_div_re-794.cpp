@@ -14,9 +14,9 @@ int main()
 	// operate A from its number's higher position to lower position
 	for(int i = 0; i < A_str.size(); i++) { A.push_back(A_str[i] - '0'); }
 	C = high_div_int(A, B, remain);
-    //print the result
-    for(int i=0;i<C.size();i++) std::cout << C[i];
-    std::cout << std::endl << remain << std::endl;
+	//print the result
+	for(int i = 0; i < C.size(); i++) std::cout << C[i];
+	std::cout << std::endl << remain << std::endl;
 }
 
 std::vector<int> high_div_int(std::vector<int>& A, int& B, int& remain)
@@ -31,5 +31,5 @@ std::vector<int> high_div_int(std::vector<int>& A, int& B, int& remain)
 	}
 	// we remove the leading zero
 	while(C.size() > 1 && C.front() == 0) { C.erase(C.begin()); }
-    return C;
+	return C;
 }
