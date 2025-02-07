@@ -202,7 +202,11 @@
 <li><a href="#802-interval_sum">802-interval_sum</a></li>
 </ul>
 </li>
-<li><a href="#%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6">区间合并</a></li>
+<li><a href="#%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6">区间合并</a>
+<ul>
+<li><a href="#803-interval_combine">803-interval_combine</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -284,6 +288,7 @@
 }
 </code></pre>
 <h2 id="区间合并"><a class="header" href="#区间合并">区间合并</a></h2>
+<h3 id="803-interval_combine"><a class="header" href="#803-interval_combine">803-interval_combine</a></h3>
 <p>因为区间的两头都是不固定的，那么我们应该固定一头，方便的我们固定到最左边按照left升序来排用户的区间对（left，right），在这里只需要把pair放入vector中，调用sort，默认会按照first排序然后才按照second排序，然后我们就维护一个最大区间就好了，最开始最大区间就是第一个pair的区间，如果下一个的left在区间内，那么就不会割裂，并且如果此时它的right超过了区间，就可以拓展区间了。这里考虑算法正确性，在割裂判断的时候，不可能后面有一个pair能扩大当前的区间，因为后面的left都必定在当前区间之后，这个区间已经不可能扩大了，则应当割裂，通过这种方式就能够一个个的找出最大区间（割裂的时候将区间更换为使得其割裂的pair的区间），然后计数记录就行了。</p>
 
                     </main>
@@ -291,6 +296,9 @@
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
+                            <a rel="next prefetch" href="../basic/note2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -299,6 +307,9 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
 
+                    <a rel="next prefetch" href="../basic/note2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
