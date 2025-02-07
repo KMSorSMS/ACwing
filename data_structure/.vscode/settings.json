@@ -1,0 +1,17 @@
+{
+    "github.copilot.enable": {
+        "c": false,
+        "cpp": false
+    },
+    "rust-analyzer.checkOnSave": true,
+    "files.associations": {
+        "*.json": "jsonc",
+        ".gdbinit": "shell",
+        ".gdb": "shell",
+        "*.cu": "cuda",
+        "algorithm": "cpp"
+    },
+    "clangd.fallbackFlags": [
+        "--std=c++17"
+    ]
+}
