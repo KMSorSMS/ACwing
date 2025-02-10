@@ -1,6 +1,16 @@
+# single_linked_list-826.cpp
 
+# Detect the operating system
+UNAME_S := $(shell uname -s)
 
-TARGET := 
+# Set the debugger based on the operating system
+ifeq ($(UNAME_S), Darwin)
+    DEBUGGER := lldb
+else
+    DEBUGGER := gdb
+endif
+
+TARGET := single_linked_list-826
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
@@ -11,7 +21,7 @@ run:${TARGET}
 	./build/$(TARGET)
 debug:build
 	g++ -g -o build/debug/$(TARGET) $(TARGET_file)
-	gdb build/debug/$(TARGET)
+	$(DEBUGGER) build/debug/$(TARGET)
 
 build:
 	mkdir -p build
