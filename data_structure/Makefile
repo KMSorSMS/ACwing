@@ -1,5 +1,3 @@
-# single_linked_list-826.cpp
-
 # Detect the operating system
 UNAME_S := $(shell uname -s)
 
@@ -10,7 +8,12 @@ else
     DEBUGGER := gdb
 endif
 
-TARGET := single_linked_list-826
+
+# single_linked_list-826.cpp
+# double_linked_list-827.cpp
+# double_linked_list_imp-827.cpp
+
+TARGET := double_linked_list_imp-827
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
