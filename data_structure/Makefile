@@ -9,11 +9,13 @@ else
 endif
 
 
-# single_linked_list-826.cpp
-# double_linked_list-827.cpp
-# double_linked_list_imp-827.cpp
+# single_linked_list-826
+# double_linked_list-827
+# double_linked_list_imp-827
+# mock_stack-828
+# mock_queue-829
 
-TARGET := double_linked_list_imp-827
+TARGET := mock_queue-829
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
