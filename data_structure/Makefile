@@ -14,8 +14,8 @@ endif
 # double_linked_list_imp-827
 # mock_stack-828
 # mock_queue-829
-
-TARGET := mock_queue-829
+# first_left_min-830
+TARGET := first_left_min-830
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
