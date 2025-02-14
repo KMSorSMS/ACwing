@@ -15,13 +15,15 @@ endif
 # mock_stack-828
 # mock_queue-829
 # first_left_min-830
-TARGET := first_left_min-830
+# calculate-3302
+
+TARGET := calculate-3302
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
 # $(info $(TARGET_file))
 $(TARGET): $(TARGET_file) build
-	g++ -std=c++17 -o build/$(TARGET) $(TARGET_file)
+	g++ -std=c++11 -o build/$(TARGET) $(TARGET_file)
 run:${TARGET}
 	./build/$(TARGET)
 debug:build
