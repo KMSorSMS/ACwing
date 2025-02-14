@@ -3,7 +3,12 @@
 #include <string>
 #include <sys/types.h>
 #include <unordered_map>
+/*
+特例：
+3/(1)*1
+1-((1-3))*2-3
 
+*/
 #define N 100010
 char OP[N];
 int NUM[N];
@@ -25,6 +30,7 @@ inline void eval()
 		break;
 	case '-':
 		result = a - b;
+		// printf("a-b: %d,a: %d,b:%d\n", a - b, a, b);
 		break;
 	case '*':
 		result = a * b;
@@ -46,7 +52,7 @@ int main()
 	for(int i = 0; i < s.size(); i++)
 	{
 		exp_ = s[i];
-		// printf("01 exp is: %c\n", exp_);	
+		// printf("01 exp is: %c\n", exp_);
 		// printf("you input --%c--\n", exp_);
 		if(exp_ >= '0' && exp_ <= '9')
 		{
@@ -61,8 +67,9 @@ int main()
 				// printf("02 exp is: %c\n", exp_);
 			}
 			NUM[++num_top] = num;
+			i = i - 1;
 		}
-		if(exp_ == '(')
+		else if(exp_ == '(')
 		{
 			// 比较特殊，直接入栈
 			OP[++op_top] = exp_;
@@ -70,6 +77,7 @@ int main()
 		else if(exp_ == ')')
 		{
 			// 特殊，需要一直算到左括号
+			exp_ = OP[op_top];
 			while(exp_ != '(')
 			{
 				// printf("debug op is: %c\n", exp_);
@@ -95,13 +103,16 @@ int main()
 		}
 		else
 		{
-			// printf("op top in nums is :%d and op is:%c\n", op_top, exp_);
 			char tmp = exp_;
+			// printf("op top in nums is :%d and op is:%c\n", op_top, exp_);
 			while(op_top >= 0 && h[exp_] <= h[OP[op_top]])
 			{
 				exp_ = OP[op_top--];
+				// printf("in op: %c\n",exp_);
 				eval();
+				exp_ = tmp;
 			}
+			// printf("fin\n");
 			OP[++op_top] = tmp;
 		}
 	}
