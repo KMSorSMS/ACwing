@@ -16,8 +16,9 @@ endif
 # mock_queue-829
 # first_left_min-830
 # calculate-3302
+# sliding_window-154
 
-TARGET := calculate-3302
+TARGET := sliding_window-154
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
