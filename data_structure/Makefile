@@ -17,8 +17,9 @@ endif
 # first_left_min-830
 # calculate-3302
 # sliding_window-154
+# Trie_str_count-835
 
-TARGET := sliding_window-154
+TARGET := Trie_str_count-835
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
