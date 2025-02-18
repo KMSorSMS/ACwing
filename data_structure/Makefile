@@ -18,8 +18,9 @@ endif
 # calculate-3302
 # sliding_window-154
 # Trie_str_count-835
+# max_xor_pair-143
 
-TARGET := Trie_str_count-835
+TARGET := max_xor_pair-143
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
