@@ -37,22 +37,12 @@ int main()
 	for(int i = 1; i < n; i++)
 	{
 		ne = Next[i - 1];
-		// printf("next is: %d, i is: %d\n", ne, i);
-		while(ne && P[i] != P[ne])
-		{
-			ne = Next[ne - 1];
-			// printf("ne is %d\n", ne);
-		}
-		// printf("char is %c,%c\n", P[i], P[ne]);
+		while(ne && P[i] != P[ne]) ne = Next[ne - 1];
 		if(P[i] == P[ne]) Next[i] = ne + 1;
 	}
-	// 打印next数组
-	// for(int i = 0; i < n; i++) { printf("%d ", Next[i]); }
-	// std::cout << std::endl;
 	// 根据next串我们能够进行匹配
 	for(int i = 0, j = 0; i < m; i++)
 	{
-		// printf("\ni is:%d, j is:%d\n", i, j);
 		while(j < n && i < m && S[i] != P[j])
 		{
 			if(j == 0)
