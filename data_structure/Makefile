@@ -19,9 +19,10 @@ endif
 # sliding_window-154
 # Trie_str_count-835
 # max_xor_pair-143
-# KMP_str
+# KMP_str-831
+# merge_group-836
 
-TARGET := KMP_str
+TARGET := merge_group-836
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
