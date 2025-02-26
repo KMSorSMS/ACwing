@@ -21,8 +21,9 @@ endif
 # max_xor_pair-143
 # KMP_str-831
 # merge_group-836
+# connected_block-837
 
-TARGET := merge_group-836
+TARGET := connected_block-837
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
