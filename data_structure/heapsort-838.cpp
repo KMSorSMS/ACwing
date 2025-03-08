@@ -21,19 +21,40 @@
 #define N 100010
 int HEAP[N];
 // sort the smaller heapwe
-void small_heap_sort_(int node, int last)
+// void small_heap_sort_(int node, int last)
+// {
+// 	int left = (node << 1), right = (node << 1) + 1, smaller;
+// 	left = left > last ? node : left, right = right > last ? node : right;
+// 	smaller = HEAP[left] < HEAP[right] ? left : right;
+// 	if(HEAP[node] > HEAP[smaller])
+// 	{
+// 		// need to exchange
+// 		int tmp = HEAP[smaller];
+// 		HEAP[smaller] = HEAP[node];
+// 		HEAP[node] = tmp;
+// 		// recursively sort the changed val
+// 		small_heap_sort_(smaller, last);
+// 	}
+// }
+inline void h_swap(int node1, int node2)
 {
-	int left = (node << 1), right = (node << 1) + 1, smaller;
-	left = left > last ? node : left, right = right > last ? node : right;
-	smaller = HEAP[left] < HEAP[right] ? left : right;
-	if(HEAP[node] > HEAP[smaller])
+	int tmp = HEAP[node1];
+	HEAP[node1] = HEAP[node2];
+	HEAP[node2] = tmp;
+}
+void h_down(int node, int last)
+{
+	while(node <= last)
 	{
-		// need to exchange
-		int tmp = HEAP[smaller];
-		HEAP[smaller] = HEAP[node];
-		HEAP[node] = tmp;
-		// recursively sort the changed val
-		small_heap_sort_(smaller, last);
+		int left = (node << 1), right = (node << 1) + 1, smaller;
+		left = left > last ? node : left, right = right > last ? node : right;
+		smaller = HEAP[left] < HEAP[right] ? left : right;
+		if(HEAP[node] > HEAP[smaller]) { 
+			h_swap(node, smaller);
+			node = smaller;
+		}else{
+			break;
+		}
 	}
 }
 
@@ -43,11 +64,11 @@ int main()
 	scanf("%d %d", &n, &m);
 	for(int i = 1; i <= n; i++) { scanf("%d", &HEAP[i]); }
 	// from down to top, right to left we sort it
-	for(int j = (n >> 1); j >= 1; j--) { small_heap_sort_(j, n); }
+	for(int j = (n >> 1); j >= 1; j--) { h_down(j, n); }
 	while(m--)
 	{
 		// need to show the first m number
-		small_heap_sort_(1, n);
+		h_down(1, n);
 		// pop out the first by swap it with last
 		printf("%d ", HEAP[1]);
 		tmp = HEAP[1];
