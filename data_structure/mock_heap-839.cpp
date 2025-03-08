@@ -65,16 +65,6 @@ inline void smaller_h_down(int node, int last)
 		}
 		else { break; }
 	}
-	// int left = (node << 1), right = (node << 1) + 1, smaller;
-	// left = left > last ? node : left, right = right > last ? node : right;
-	// smaller = HEAP[left] < HEAP[right] ? left : right;
-	// if(HEAP[node] > HEAP[smaller])
-	// {
-	// 	// need to exchange
-	// 	h_swap(node, smaller);
-	// 	// recursively sort the changed val
-	// 	smaller_h_down(smaller, last);
-	// }
 }
 
 inline void smaller_h_up(int node)
@@ -91,11 +81,6 @@ inline void smaller_h_up(int node)
 		}
 		else { break; }
 	}
-	// while(node / 2 && HEAP[node / 2] > HEAP[node])
-	// {
-	// 	h_swap(node / 2, node);
-	// 	node /= 2;
-	// }
 }
 
 int main()
