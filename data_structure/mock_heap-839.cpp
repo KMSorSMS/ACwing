@@ -35,6 +35,7 @@ DM
 #include <iostream>
 #include <ostream>
 #include <string>
+#include <utility>
 #define N 100010
 // the K_H stores the index of kth insertion to its heap index
 // the H_K stores the index of numbers in heap to its kth insertion
@@ -42,12 +43,9 @@ int HEAP[N], K_H[N], H_K[N];
 
 inline void h_swap(int node1, int node2)
 {
-	int tmp1 = HEAP[node1], tmp2 = H_K[node1];
-	HEAP[node1] = HEAP[node2];
-	K_H[H_K[node1]] = node2, K_H[H_K[node2]] = node1;
-	H_K[node1] = H_K[node2];
-
-	HEAP[node2] = tmp1, H_K[node2] = tmp2;
+	std::swap(K_H[H_K[node1]], K_H[H_K[node2]]);
+	std::swap(H_K[node1], H_K[node2]);
+	std::swap(HEAP[node1], HEAP[node2]);
 }
 
 inline void smaller_h_down(int node, int last)
@@ -69,18 +67,10 @@ inline void smaller_h_down(int node, int last)
 
 inline void smaller_h_up(int node)
 {
-	int fa = node >> 1;
-	while(fa)
-	{
-
-		if(HEAP[node] < HEAP[fa])
-		{
-			h_swap(node, fa);
-			node = fa;
-			fa = node >> 1;
-		}
-		else { break; }
-	}
+	while(node/2 && HEAP[node/2] > HEAP[node]){
+        h_swap(node/2, node);
+        node /=2;
+    }
 }
 
 int main()
