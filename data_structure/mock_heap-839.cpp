@@ -32,3 +32,107 @@ DM
 6
 */
 
+#include <iostream>
+#include <ostream>
+#include <string>
+#define N 100010
+// the K_H stores the index of kth insertion to its heap index
+// the H_K stores the index of numbers in heap to its kth insertion
+int HEAP[N], K_H[N], H_K[N];
+
+inline void h_swap(int node1, int node2)
+{
+	int tmp1 = HEAP[node1], tmp2 = H_K[node1];
+	HEAP[node1] = HEAP[node2];
+	K_H[H_K[node1]] = node2, K_H[H_K[node2]] = node1;
+	H_K[node1] = H_K[node2];
+
+	HEAP[node2] = tmp1, H_K[node2] = tmp2;
+}
+
+inline void smaller_h_down(int node, int last)
+{
+	while(node <= last)
+	{
+		int left = node << 1, right = (node << 1) + 1, smaller;
+		left = left > last ? node : left, right = right > last ? node : right;
+		smaller = HEAP[left] < HEAP[right] ? left : right;
+		if(HEAP[smaller] < HEAP[node])
+		{
+			// we need to exchange and then update node to its changed son (going down)
+			h_swap(smaller, node);
+			node = smaller;
+		}
+		else { break; }
+	}
+	// int left = (node << 1), right = (node << 1) + 1, smaller;
+	// left = left > last ? node : left, right = right > last ? node : right;
+	// smaller = HEAP[left] < HEAP[right] ? left : right;
+	// if(HEAP[node] > HEAP[smaller])
+	// {
+	// 	// need to exchange
+	// 	h_swap(node, smaller);
+	// 	// recursively sort the changed val
+	// 	smaller_h_down(smaller, last);
+	// }
+}
+
+inline void smaller_h_up(int node)
+{
+	int fa = node >> 1;
+	while(fa)
+	{
+
+		if(HEAP[node] < HEAP[fa])
+		{
+			h_swap(node, fa);
+			node = fa;
+			fa = node >> 1;
+		}
+		else { break; }
+	}
+	// while(node / 2 && HEAP[node / 2] > HEAP[node])
+	// {
+	// 	h_swap(node / 2, node);
+	// 	node /= 2;
+	// }
+}
+
+int main()
+{
+	int n, size = 0, x, k, node, k_num_ = 1;
+	std::string op;
+	scanf("%d", &n);
+	while(n--)
+	{
+		std::cin >> op;
+		if(op == "I")
+		{
+			std::cin >> x;
+			HEAP[++size] = x;
+			K_H[k_num_] = size, H_K[size] = k_num_;
+			k_num_++;
+			smaller_h_up(size);
+		}
+		else if(op == "PM") { std::cout << HEAP[1] << std::endl; }
+		else if(op == "DM")
+		{
+			h_swap(1, size--);
+			smaller_h_down(1, size);
+		}
+		else if(op == "D")
+		{
+			std::cin >> k;
+			node = K_H[k];
+			h_swap(node, size--);
+			smaller_h_up(node), smaller_h_down(node, size);
+		}
+		else if(op == "C")
+		{
+			std::cin >> k >> x;
+			node = K_H[k];
+			HEAP[node] = x;
+			smaller_h_up(node), smaller_h_down(node, size);
+		}
+	}
+}
