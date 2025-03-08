@@ -23,9 +23,8 @@ int HEAP[N];
 // sort the smaller heapwe
 void small_heap_sort_(int node, int last)
 {
-	int left = (node << 1) + 1, right = (node << 1) + 2, smaller;
-	if(left > last) return;
-	right = right > last ? last : right;
+	int left = (node << 1), right = (node << 1) + 1, smaller;
+	left = left > last ? node : left, right = right > last ? node : right;
 	smaller = HEAP[left] < HEAP[right] ? left : right;
 	if(HEAP[node] > HEAP[smaller])
 	{
@@ -42,18 +41,17 @@ int main()
 {
 	int n, m, tmp;
 	scanf("%d %d", &n, &m);
-	for(int i = 0; i < n; i++) { scanf("%d", &HEAP[i]); }
-	n--;
+	for(int i = 1; i <= n; i++) { scanf("%d", &HEAP[i]); }
 	// from down to top, right to left we sort it
-	for(int j = ((n - 1) >> 1); j >= 0; j--) { small_heap_sort_(j, n); }
+	for(int j = (n >> 1); j >= 1; j--) { small_heap_sort_(j, n); }
 	while(m--)
 	{
 		// need to show the first m number
-		small_heap_sort_(0, n);
+		small_heap_sort_(1, n);
 		// pop out the first by swap it with last
-		printf("%d ", HEAP[0]);
-		tmp = HEAP[0];
-		HEAP[0] = HEAP[n];
+		printf("%d ", HEAP[1]);
+		tmp = HEAP[1];
+		HEAP[1] = HEAP[n];
 		n--;
 		// HEAP[n] = tmp; // no need to change HEAP[n] as we only need to print the res
 	}
