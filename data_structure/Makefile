@@ -26,8 +26,9 @@ endif
 # foodchain_imp2-240
 # heapsort-838
 # mock_heap-839
+# mock_dis_link-840
 
-TARGET := mock_heap-839
+TARGET := mock_dis_link-840
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
