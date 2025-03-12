@@ -27,8 +27,9 @@ endif
 # heapsort-838
 # mock_heap-839
 # mock_dis_link-840
+# str_hash-841
 
-TARGET := mock_dis_link-840
+TARGET := str_hash-841
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
