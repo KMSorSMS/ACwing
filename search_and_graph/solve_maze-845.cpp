@@ -21,7 +21,6 @@
 输出样例：
 8
 */
-// #include <cstdio>
 #include <iostream>
 #include <utility>
 #define N 110
@@ -53,19 +52,12 @@ void bfs(PII start, PII end) {
         if (maze[tmp_x][tmp_y] == '0' && tmp_x >= 0 && tmp_x < n &&
             tmp_y >= 0 && tmp_y < m &&
             !added[tmp_x][tmp_y]) { // make sure in maze;
-          //   printf("tmp_x is:%d,tmp_y is:%d\n", tmp_x, tmp_y);
           added[tmp_x][tmp_y] = true, queue[tail++] = {tmp_x, tmp_y};
         }
       }
-      //   printf("iner  head is:%d,old_tail is:%d,tail is %d\n", head,
-      //   old_tail,
-      //          tail);
     }
     old_tail = tail, result++;
-    // printf("outer head is:%d,old_tail is:%d,tail is %d\n", head, old_tail,
-    //        tail);
   }
-  //   printf("head is:%d,tail is:%d\n", head, tail);
 }
 
 int main() {
