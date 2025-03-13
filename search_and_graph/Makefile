@@ -11,8 +11,9 @@ endif
 
 # sort_num-842
 # eight_queen-843
+# solve_maze-845
 
-TARGET := eight_queen-843
+TARGET := solve_maze-845
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
