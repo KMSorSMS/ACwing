@@ -33,7 +33,6 @@ x 4 6
 19
 */
 
-#include <cstdio>
 #include <iostream>
 #include <ostream>
 #include <queue>
