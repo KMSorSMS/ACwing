@@ -14,15 +14,16 @@ endif
 # solve_maze-844
 # solve_maze_imp-844
 # eight_num_code-845
+# center_of_tree-846
 
-TARGET := solve_maze_imp-844
+TARGET := center_of_tree-846
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
 # $(info $(TARGET_file))
-$(TARGET): $(TARGET_file) build
+build/$(TARGET): $(TARGET_file) build
 	g++ -std=c++11 -o build/$(TARGET) $(TARGET_file)
-run:${TARGET}
+run: build/${TARGET}
 	./build/$(TARGET)
 debug:build
 	g++ -g -o build/debug/$(TARGET) $(TARGET_file)
@@ -39,4 +40,4 @@ git:
 	git add .
 	git commit -m ":zap: "
 	git commit --amend 
-.PHONY:build format
+.PHONY:format
