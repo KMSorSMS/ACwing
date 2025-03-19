@@ -19,12 +19,10 @@ m 行，每行包含两个整数 x 和 y，表示存在一条从点 x 到点 y �
 */
 
 #include <iostream>
-#include <queue>
 #define N 100010
 #define M 100010
 
-int h[N], e[M], ne[M], eidx = 1, d[N], n, m;
-std::queue<int> result;
+int h[N], e[M], ne[M], eidx = 1, d[N], n, m, que_no_in_[N];
 
 // add edge x->y
 inline void add(int x, int y) {
@@ -33,27 +31,25 @@ inline void add(int x, int y) {
 }
 
 inline void bfs() {
-  std::queue<int> que_no_in_;
   // first find all the node with no input edge
+  int idx = 1, start = 1;
   for (int i = 1; i <= n; i++) {
     if (d[i] == 0) {
-      que_no_in_.push(i), result.push(i);
+      que_no_in_[idx++] = i;
     }
   }
-  while (!que_no_in_.empty()) {
-    int tmp_node = que_no_in_.front();
-    que_no_in_.pop();
+  while (start < idx) {
+    int tmp_node = que_no_in_[start++];
     // range its edges to update d to get new zero input node
     for (int tmp_edge = h[tmp_node]; tmp_edge != 0; tmp_edge = ne[tmp_edge]) {
       tmp_node = e[tmp_edge];
       if ((--d[tmp_node]) == 0) {
-        que_no_in_.push(tmp_node), result.push(tmp_node);
+        que_no_in_[idx++] = tmp_node;
       }
     }
-    if (result.size() == n) {
-      while (!result.empty()) {
-        std::cout << result.front() << " ";
-        result.pop();
+    if (idx > n) {
+      for (int i = 1; i <= n; i++) {
+        std::cout << que_no_in_[i] << " ";
       }
       std::cout << "\n";
       return;
