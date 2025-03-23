@@ -25,26 +25,29 @@
 int n, path[N];
 bool used[N];
 
-void dfs(int u) {
-  if (u > n ) {
-    for (int i = 1; i <= n; i++) {
-      std::cout << path[i] << " ";
-    }
-    std::cout << std::endl;
-    return;
-  }
-  //   go on depth further
-  for (int i = 1; i <= n; i++) {
-    if (!used[i]) {
-      path[u] = i;
-      used[i] = true;
-      dfs(u + 1);
-      used[i] = false;
-    }
-  }
+void dfs(int u)
+{
+	if(u > n)
+	{
+		for(int i = 1; i <= n; i++) { std::cout << path[i] << " "; }
+		std::cout << std::endl;
+		return;
+	}
+	//   go on depth further
+	for(int i = 1; i <= n; i++)
+	{
+		if(!used[i])
+		{
+			path[u] = i;
+			used[i] = true;
+			dfs(u + 1);
+			used[i] = false;
+		}
+	}
 }
 
-int main() {
-  std::cin >> n;
-  dfs(1);
+int main()
+{
+	std::cin >> n;
+	dfs(1);
 }

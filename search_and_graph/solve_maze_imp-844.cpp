@@ -37,48 +37,50 @@ PII start = {1, 1}, end;
 int d[N][M];
 int dir[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-int bfs() {
-  std::queue<PII> que;
-  que.push(start);
-  PII tmp, old_tmp;
-  int old_d;
-  while (!que.empty()) {
-    old_tmp = tmp = que.front();
-    que.pop();
-    old_d = d[old_tmp.first][old_tmp.second];
-    if (tmp.first == end.first && tmp.second == end.second) {
-      return old_d;
-    }
-    for (int i = 0; i < 4; i++) {
-      tmp.first += dir[i][0], tmp.second += dir[i][1];
-      if (maze[tmp.first][tmp.second] == '0' && tmp.first >= 1 &&
-          tmp.first <= n && tmp.second >= 1 && tmp.second <= m) {
-        maze[tmp.first][tmp.second] = '1';
-        d[tmp.first][tmp.second] = old_d + 1;
-        que.push(tmp);
-        // printf("in finding:{%d,%d}---{%d,%d}\n", old_tmp.first, old_tmp.second,
-        //        tmp.first, tmp.second);
-      }
-      tmp = old_tmp;
-    }
-  }
-  return -1;
+int bfs()
+{
+	std::queue<PII> que;
+	que.push(start);
+	PII tmp, old_tmp;
+	int old_d;
+	while(!que.empty())
+	{
+		old_tmp = tmp = que.front();
+		que.pop();
+		old_d = d[old_tmp.first][old_tmp.second];
+		if(tmp.first == end.first && tmp.second == end.second) { return old_d; }
+		for(int i = 0; i < 4; i++)
+		{
+			tmp.first += dir[i][0], tmp.second += dir[i][1];
+			if(maze[tmp.first][tmp.second] == '0' && tmp.first >= 1 && tmp.first <= n &&
+			   tmp.second >= 1 && tmp.second <= m)
+			{
+				maze[tmp.first][tmp.second] = '1';
+				d[tmp.first][tmp.second] = old_d + 1;
+				que.push(tmp);
+				// printf("in finding:{%d,%d}---{%d,%d}\n", old_tmp.first, old_tmp.second,
+				//        tmp.first, tmp.second);
+			}
+			tmp = old_tmp;
+		}
+	}
+	return -1;
 }
 
-int main() {
-  std::cin >> n >> m;
-  for (int i = 1; i <= n; i++) {
-    for (int j = 1; j <= m; j++) {
-      std::cin >> maze[i][j];
-    }
-  }
-//   std::cout << "\n";
-//   for (int i = 1; i <= n; i++) {
-//     for (int j = 1; j <= m; j++) {
-//       std::cout << maze[i][j] << ' ';
-//     }
-//     std::cout << "\n";
-//   }
-  end = {n, m};
-  std::cout << bfs() << std::endl;
+int main()
+{
+	std::cin >> n >> m;
+	for(int i = 1; i <= n; i++)
+	{
+		for(int j = 1; j <= m; j++) { std::cin >> maze[i][j]; }
+	}
+	//   std::cout << "\n";
+	//   for (int i = 1; i <= n; i++) {
+	//     for (int j = 1; j <= m; j++) {
+	//       std::cout << maze[i][j] << ' ';
+	//     }
+	//     std::cout << "\n";
+	//   }
+	end = {n, m};
+	std::cout << bfs() << std::endl;
 }

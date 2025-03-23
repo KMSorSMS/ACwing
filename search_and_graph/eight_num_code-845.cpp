@@ -43,49 +43,52 @@ std::string start;
 std::string end = "12345678x";
 int dir[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-int bfs() {
-  std::queue<std::string> que;
-  std::string tmp;
-  std::unordered_map<std::string, int> d;
-  int tmp_index, x, y, tmp_d, x_old, y_old;
-  d[start] = 0;
-  que.push(start);
-  while (!que.empty()) {
-    tmp = que.front();
-    que.pop();
-    // for (int i = 0; i < 3; i++) {
-    //   for (int j = 0; j < 3; j++) {
-    //     printf("%c ", start[i * 3 + j]);
-    //   }
-    //   printf("\n");
-    // }
-    // printf("\n");
-    if (tmp == end)
-      return d[tmp];
-    tmp_index = tmp.find('x');
-    x_old = x = tmp_index / 3, y_old = y = tmp_index % 3, tmp_d = d[tmp];
-    for (int i = 0; i < 4; i++) {
-      x += dir[i][0], y += dir[i][1];
-      if (x >= 0 && x < 3 && y >= 0 && y < 3) {
-        std::swap(tmp[tmp_index], tmp[x * 3 + y]);
-        if (d.find(tmp) == d.end()) {
-          que.push(tmp), d[tmp] = tmp_d + 1;
-        }
-        std::swap(tmp[tmp_index], tmp[x * 3 + y]);
-      }
-      x = x_old, y = y_old;
-    }
-  }
-  return -1;
+int bfs()
+{
+	std::queue<std::string> que;
+	std::string tmp;
+	std::unordered_map<std::string, int> d;
+	int tmp_index, x, y, tmp_d, x_old, y_old;
+	d[start] = 0;
+	que.push(start);
+	while(!que.empty())
+	{
+		tmp = que.front();
+		que.pop();
+		// for (int i = 0; i < 3; i++) {
+		//   for (int j = 0; j < 3; j++) {
+		//     printf("%c ", start[i * 3 + j]);
+		//   }
+		//   printf("\n");
+		// }
+		// printf("\n");
+		if(tmp == end) return d[tmp];
+		tmp_index = tmp.find('x');
+		x_old = x = tmp_index / 3, y_old = y = tmp_index % 3, tmp_d = d[tmp];
+		for(int i = 0; i < 4; i++)
+		{
+			x += dir[i][0], y += dir[i][1];
+			if(x >= 0 && x < 3 && y >= 0 && y < 3)
+			{
+				std::swap(tmp[tmp_index], tmp[x * 3 + y]);
+				if(d.find(tmp) == d.end()) { que.push(tmp), d[tmp] = tmp_d + 1; }
+				std::swap(tmp[tmp_index], tmp[x * 3 + y]);
+			}
+			x = x_old, y = y_old;
+		}
+	}
+	return -1;
 }
 
-int main() {
-  char c;
-  for (int i = 0; i < 9; i++) {
-    std::cin >> c;
-    start += c;
-  }
-  //   printf("after input\n");
-  //   printf("str is: %s\n", start.c_str());
-  std::cout << bfs() << std::endl;
+int main()
+{
+	char c;
+	for(int i = 0; i < 9; i++)
+	{
+		std::cin >> c;
+		start += c;
+	}
+	//   printf("after input\n");
+	//   printf("str is: %s\n", start.c_str());
+	std::cout << bfs() << std::endl;
 }

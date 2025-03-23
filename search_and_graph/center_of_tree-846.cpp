@@ -39,40 +39,46 @@ int h[N], e[2 * N], ne[2 * N], n, eidx = 1, result = N;
 bool added[N];
 
 // insert a->b
-inline void add(int a, int b) {
-  e[eidx] = b, ne[eidx] = h[a];
-  h[a] = eidx++;
+inline void add(int a, int b)
+{
+	e[eidx] = b, ne[eidx] = h[a];
+	h[a] = eidx++;
 }
 
 // dfs搜索，返回start所属的子连通图的节点个数
-int dfs(int start) {
-  added[start] = true;
-  int total_sum = 1, sub_max = 0, node_, sub_sum;
-  for (int edge_ = h[start]; edge_ != 0; edge_ = ne[edge_]) {
-    node_ = e[edge_];
-    if (!added[node_]) {
-      sub_sum = dfs(node_);
-      total_sum += sub_sum, sub_max = MAX(sub_sum, sub_max);
-    }
-  }
-  sub_max = MAX(sub_max, n - total_sum);
-  result = MIN(sub_max, result);
-  added[start] = false;
-  return total_sum;
+int dfs(int start)
+{
+	added[start] = true;
+	int total_sum = 1, sub_max = 0, node_, sub_sum;
+	for(int edge_ = h[start]; edge_ != 0; edge_ = ne[edge_])
+	{
+		node_ = e[edge_];
+		if(!added[node_])
+		{
+			sub_sum = dfs(node_);
+			total_sum += sub_sum, sub_max = MAX(sub_sum, sub_max);
+		}
+	}
+	sub_max = MAX(sub_max, n - total_sum);
+	result = MIN(sub_max, result);
+	added[start] = false;
+	return total_sum;
 }
 
-int main() {
-  // 接收参数，建立树
-  int node1, node2;
-  std::cin >> n;
-  for (int i = 1; i <= n - 1; i++) {
-    std::cin >> node1 >> node2;
-    add(node1, node2), add(node2, node1);
-  }
-//   printf("fin input\n");
-  dfs(1);
-  std::cout << result << std::endl;
-  return 0;
+int main()
+{
+	// 接收参数，建立树
+	int node1, node2;
+	std::cin >> n;
+	for(int i = 1; i <= n - 1; i++)
+	{
+		std::cin >> node1 >> node2;
+		add(node1, node2), add(node2, node1);
+	}
+	//   printf("fin input\n");
+	dfs(1);
+	std::cout << result << std::endl;
+	return 0;
 }
 
 /*

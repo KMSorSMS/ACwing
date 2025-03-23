@@ -25,48 +25,50 @@ m 行，每行包含两个整数 x 和 y，表示存在一条从点 x 到点 y �
 int h[N], e[M], ne[M], eidx = 1, d[N], n, m, que_no_in_[N];
 
 // add edge x->y
-inline void add(int x, int y) {
-  e[eidx] = y, ne[eidx] = h[x], d[y]++;
-  h[x] = eidx++;
+inline void add(int x, int y)
+{
+	e[eidx] = y, ne[eidx] = h[x], d[y]++;
+	h[x] = eidx++;
 }
 
-inline void bfs() {
-  // first find all the node with no input edge
-  int idx = 1, start = 1;
-  for (int i = 1; i <= n; i++) {
-    if (d[i] == 0) {
-      que_no_in_[idx++] = i;
-    }
-  }
-  while (start < idx) {
-    int tmp_node = que_no_in_[start++];
-    // range its edges to update d to get new zero input node
-    for (int tmp_edge = h[tmp_node]; tmp_edge != 0; tmp_edge = ne[tmp_edge]) {
-      tmp_node = e[tmp_edge];
-      if ((--d[tmp_node]) == 0) {
-        que_no_in_[idx++] = tmp_node;
-      }
-    }
-    if (idx > n) {
-      for (int i = 1; i <= n; i++) {
-        std::cout << que_no_in_[i] << " ";
-      }
-      std::cout << "\n";
-      return;
-    }
-  }
-  std::cout << "-1\n";
+inline void bfs()
+{
+	// first find all the node with no input edge
+	int idx = 1, start = 1;
+	for(int i = 1; i <= n; i++)
+	{
+		if(d[i] == 0) { que_no_in_[idx++] = i; }
+	}
+	while(start < idx)
+	{
+		int tmp_node = que_no_in_[start++];
+		// range its edges to update d to get new zero input node
+		for(int tmp_edge = h[tmp_node]; tmp_edge != 0; tmp_edge = ne[tmp_edge])
+		{
+			tmp_node = e[tmp_edge];
+			if((--d[tmp_node]) == 0) { que_no_in_[idx++] = tmp_node; }
+		}
+		if(idx > n)
+		{
+			for(int i = 1; i <= n; i++) { std::cout << que_no_in_[i] << " "; }
+			std::cout << "\n";
+			return;
+		}
+	}
+	std::cout << "-1\n";
 }
 
-int main() {
-  int x, y;
-  std::cin >> n >> m;
-  for (int i = 1; i <= m; i++) {
-    std::cin >> x >> y;
-    add(x, y);
-  }
-  bfs();
-  return 0;
+int main()
+{
+	int x, y;
+	std::cin >> n >> m;
+	for(int i = 1; i <= m; i++)
+	{
+		std::cin >> x >> y;
+		add(x, y);
+	}
+	bfs();
+	return 0;
 }
 
 /*

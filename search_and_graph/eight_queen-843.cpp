@@ -31,32 +31,36 @@ Q...
 char chess[N][N];
 int n;
 bool col[N], dia[N], adia[N];
-void dfs(int u) {
-  if (u >= n) {
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < n; j++)
-        std::cout << chess[i][j];
-      std::cout << std::endl;
-    }
-    std::cout << std::endl;
-  }
-  for (int i = 0; i < n; i++) { // range cols
-    if (!col[i] && !dia[u + i] && !adia[n + i - u]) {
-      chess[u][i] = 'Q';
-      col[i] = dia[u + i] = adia[n + i - u] = true;
-      dfs(u + 1);
-      col[i] = dia[u + i] = adia[n + i - u] = false;
-      chess[u][i] = '.';
-    }
-  }
+void dfs(int u)
+{
+	if(u >= n)
+	{
+		for(int i = 0; i < n; i++)
+		{
+			for(int j = 0; j < n; j++) std::cout << chess[i][j];
+			std::cout << std::endl;
+		}
+		std::cout << std::endl;
+	}
+	for(int i = 0; i < n; i++)
+	{ // range cols
+		if(!col[i] && !dia[u + i] && !adia[n + i - u])
+		{
+			chess[u][i] = 'Q';
+			col[i] = dia[u + i] = adia[n + i - u] = true;
+			dfs(u + 1);
+			col[i] = dia[u + i] = adia[n + i - u] = false;
+			chess[u][i] = '.';
+		}
+	}
 }
 
-int main() {
-  std::cin >> n;
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      chess[i][j] = '.';
-    }
-  }
-  dfs(0);
+int main()
+{
+	std::cin >> n;
+	for(int i = 0; i < n; i++)
+	{
+		for(int j = 0; j < n; j++) { chess[i][j] = '.'; }
+	}
+	dfs(0);
 }

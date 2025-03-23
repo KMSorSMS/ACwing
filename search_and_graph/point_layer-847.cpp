@@ -31,42 +31,48 @@
 int m, n, h[N], e[2 * M], ne[2 * M], eidx = 1, d[N];
 bool added[N];
 // insert a->b to graph
-inline void add(int a, int b) {
-  e[eidx] = b, ne[eidx] = h[a];
-  h[a] = eidx++;
+inline void add(int a, int b)
+{
+	e[eidx] = b, ne[eidx] = h[a];
+	h[a] = eidx++;
 }
 
-int bfs(int start) {
-  std::queue<int> que;
-  int tmp_node, d_old;
-  que.push(start);
-  d[start] = 0;
-  added[start] = true;
-  while (!que.empty()) {
-    tmp_node = que.front();
-    que.pop();
-    d_old = d[tmp_node];
-    if (tmp_node == n)
-      return d_old;
-    for (int edge_ = h[tmp_node]; edge_ != 0; edge_ = ne[edge_]) {
-      tmp_node = e[edge_];
-      if (!added[tmp_node]) {
-        d[tmp_node] = d_old + 1;
-        que.push(tmp_node);
-        added[tmp_node] = true;
-      }
-    }
-  }
-  return -1;
+int bfs(int start)
+{
+	std::queue<int> que;
+	int tmp_node, d_old;
+	que.push(start);
+	d[start] = 0;
+	added[start] = true;
+	while(!que.empty())
+	{
+		tmp_node = que.front();
+		que.pop();
+		d_old = d[tmp_node];
+		if(tmp_node == n) return d_old;
+		for(int edge_ = h[tmp_node]; edge_ != 0; edge_ = ne[edge_])
+		{
+			tmp_node = e[edge_];
+			if(!added[tmp_node])
+			{
+				d[tmp_node] = d_old + 1;
+				que.push(tmp_node);
+				added[tmp_node] = true;
+			}
+		}
+	}
+	return -1;
 }
 
-int main() {
-  int a, b;
-  std::cin >> n >> m;
-  for (int i = 1; i <= m; i++) {
-    std::cin >> a >> b;
-    add(a, b);
-  }
-  std::cout << bfs(1) << std::endl;
-  return 0;
+int main()
+{
+	int a, b;
+	std::cin >> n >> m;
+	for(int i = 1; i <= m; i++)
+	{
+		std::cin >> a >> b;
+		add(a, b);
+	}
+	std::cout << bfs(1) << std::endl;
+	return 0;
 }
