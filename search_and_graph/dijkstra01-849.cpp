@@ -18,6 +18,7 @@ z。 输出格式输出一个整数，表示 1 号点到 n 号点的最短距离
 3
 */
 
+#include <cstring>
 #include <iostream>
 #define N 510
 #define M 100010
@@ -36,9 +37,8 @@ void dijks(int start, int end)
 	// first set all the distance
 	for(int edge = h[start]; edge != 0; edge = ne[edge])
 	{
-		if(dis[e[edge]] == -1 || dis[e[edge]] >= weight[edge]) dis[e[edge]] = weight[edge];
+		if(dis[e[edge]] >= weight[edge]) dis[e[edge]] = weight[edge];
 	}
-	dis[start] = 0;
 	// go to iteration
 	while(true)
 	{
@@ -47,21 +47,22 @@ void dijks(int start, int end)
 		{
 			if(!state[i])
 			{
-				if(j == -1 || (dis[i] != -1 && dis[i] < dis[j])) { j = i; }
+				if(j == -1 || (dis[i] < dis[j])) { j = i; }
 			}
 		}
 		if(j == end)
 		{
-			std::cout << dis[j] << "\n";
+			if(dis[j] == 0x3f3f3f3f)
+				std::cout << "-1" << "\n";
+			else
+				std::cout << dis[j] << "\n";
 			return;
 		}
 		state[j] = 1;
 		for(int edge = h[j]; edge != 0; edge = ne[edge])
 		{
 			int node = e[edge];
-			if(!state[node] &&
-			   ((dis[node] == -1 && weight[edge] != -1 && dis[j] != -1) ||
-				(weight[edge] != -1 && dis[j] != -1 && dis[j] + weight[edge] < dis[node])))
+			if(!state[node] && (dis[j] + weight[edge] < dis[node]))
 			{
 				dis[node] = dis[j] + weight[edge];
 			}
@@ -79,7 +80,8 @@ int main()
 		add(x, y, z);
 	}
 	int start = 1, end = n;
-	for(int i = 1; i <= n; i++) { dis[i] = -1; }
+	// 初始化
+	memset(dis, 0x3f, (n + 1) * sizeof(int));
 	dijks(start, end);
 }
 
