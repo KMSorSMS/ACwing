@@ -20,8 +20,9 @@ endif
 # dijkstra01-849
 # dijkstra01_imp-849
 # dijkstra02-850
+# restrict-shortest-853
 
-TARGET := dijkstra02-850
+TARGET := restrict-shortest-853
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
