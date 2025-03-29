@@ -20,9 +20,11 @@ endif
 # dijkstra01-849
 # dijkstra01_imp-849
 # dijkstra02-850
-# restrict-shortest-853
+# restrict_shortest-853
+# spfa_shortest-851
+# spfa_find_negtive-852
 
-TARGET := restrict-shortest-853
+TARGET := spfa_find_negtive-852
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
