@@ -23,8 +23,9 @@ endif
 # restrict_shortest-853
 # spfa_shortest-851
 # spfa_find_negtive-852
+# floyd_shortest-854
 
-TARGET := spfa_find_negtive-852
+TARGET := floyd_shortest-854
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
