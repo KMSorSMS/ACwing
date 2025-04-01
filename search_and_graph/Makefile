@@ -25,8 +25,9 @@ endif
 # spfa_find_negtive-852
 # floyd_shortest-854
 # prime_min_tree-858
+# kruskal-859
 
-TARGET := prime_min_tree-858
+TARGET := kruskal-859
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
