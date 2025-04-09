@@ -10,7 +10,8 @@ endif
 
 
 # try_div-866
-TARGET := try_div-866
+# split-867
+TARGET := split-867
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
