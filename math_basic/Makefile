@@ -11,7 +11,9 @@ endif
 
 # try_div-866
 # split-867
-TARGET := split-867
+# find_prime_n-868
+
+TARGET := find_prime_n-868
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
