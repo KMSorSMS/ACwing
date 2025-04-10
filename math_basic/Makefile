@@ -13,8 +13,9 @@ endif
 # split-867
 # find_prime_n-868
 # find_divisor-869
+# divisor_nums-870
 
-TARGET := find_divisor-869
+TARGET := divisor_nums-870
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
