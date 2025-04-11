@@ -14,8 +14,9 @@ endif
 # find_prime_n-868
 # find_divisor-869
 # divisor_nums-870
+# divisor_sum-871
 
-TARGET := divisor_nums-870
+TARGET := divisor_sum-871
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
