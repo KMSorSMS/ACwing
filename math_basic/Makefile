@@ -18,8 +18,9 @@ endif
 # gcd-872
 # euler_func-873
 # find_n_euler_func-874
+# fast_power-875
 
-TARGET := find_n_euler_func-874
+TARGET := fast_power-875
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
