@@ -22,8 +22,9 @@ endif
 # fast_power_inverse-876
 # ext_Euclid-877
 # ext_Euclid2_linear_remain-878
+# hard_euclid3-204
 
-TARGET := ext_Euclid2_linear_remain-878
+TARGET := hard_euclid3-204
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
