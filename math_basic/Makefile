@@ -26,8 +26,9 @@ endif
 # gaussian_del-883
 # gaussian_del2-884
 # combination_nums1-885
+# combination_nums2-886
 
-TARGET := combination_nums1-885
+TARGET := combination_nums2-886
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
