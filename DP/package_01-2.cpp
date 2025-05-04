@@ -30,7 +30,7 @@
 #define N 1010
 #define V 1010
 
-int f[N][V];
+int f[V];
 int w_[N], v_[N];
 
 int main()
@@ -41,17 +41,16 @@ int main()
 	// 进行动态规划
 	for(int i = 1; i <= n; i++)
 	{
-		for(int j = 1; j <= v; j++)
+		for(int j = v; j >= 0; j--)
 		{
-			f[i][j] = f[i - 1][j];
-			if(j >= v_[i]) { f[i][j] = std::max(f[i - 1][j - v_[i]] + w_[i], f[i][j]); }
+			if(j >= v_[i]) { f[j] = std::max(f[j - v_[i]] + w_[i], f[j]); }
 		}
 	}
 	// 查找最大值，就是 f[n][v]
 	// int res = 0;
 	// for(int i = 0; i <= n; i++) { res = std::max(f[i][v], res); }
 	// std::cout << res << "\n";
-	std::cout << f[n][v] << "\n";
+	std::cout << f[v] << "\n";
 }
 
 /*
@@ -62,4 +61,10 @@ int main()
 1. f[i][j] = f[i-1][j] (相当于是不选择 i 的情况)
 2. f[i][j] = f[i-1][j-v[i]] + w[i] (这是选择了 i 的情况)
 然后对 1 和 2 两种情况取最大值就能得到结果
+
+改进：
+我们发现只需要 第i次时，f[j]代表前 i 个物品容量小于 j 的最大价值 即可
+因为后续的更新是，要么第 i 次不改变 f[j],要么就是第 i 次加上上一次的 f[j-v[i]] 得到新的价值
+这里注意就是得是上一次没有在第 i 次更新过的 f[j-v[i]], 那么就必须保证在遍历 f[j]的时候，没有更新过 f[j-v[i]]
+只需要反方向遍历（从大到小）即可
 */
