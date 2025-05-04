@@ -9,8 +9,9 @@ else
 endif
 
 # package_01-2
+# complete_package-3
 
-TARGET := package_01-2
+TARGET := complete_package-3
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
