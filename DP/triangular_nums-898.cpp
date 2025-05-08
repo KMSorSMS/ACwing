@@ -29,7 +29,6 @@
 #include <algorithm>
 #include <iostream>
 #define N 500
-int v[N][N];
 int f[N][N];
 
 int main()
@@ -38,12 +37,12 @@ int main()
 	std::cin >> n;
 	for(int i = 1; i <= n; i++)
 	{
-		for(int j = 1; j <= i; j++) { std::cin >> v[i][j]; }
+		for(int j = 1; j <= i; j++) { std::cin >> f[i][j]; }
 	}
-	for(int i = 1; i <= n; i++) { f[n][i] = v[n][i]; }
+	// for(int i = 1; i <= n; i++) { f[n][i] = v[n][i]; }
 	for(int i = n - 1; i >= 1; i--)
 	{
-		for(int j = 1; j <= i; j++) { f[i][j] = std::max(f[i + 1][j], f[i + 1][j + 1]) + v[i][j]; }
+		for(int j = 1; j <= i; j++) { f[i][j] += std::max(f[i + 1][j], f[i + 1][j + 1]); }
 	}
 	std::cout << f[1][1] << "\n";
 }
