@@ -16,8 +16,9 @@ endif
 # triangular_nums-898
 # longest_upper_seq-895
 # longest_upper_seq2-896
+# longest_common_sub_seq-897
 
-TARGET := longest_upper_seq2-896
+TARGET := longest_common_sub_seq-897
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
