@@ -17,8 +17,9 @@ endif
 # longest_upper_seq-895
 # longest_upper_seq2-896
 # longest_common_sub_seq-897
+# shortest_edit_path-902
 
-TARGET := longest_common_sub_seq-897
+TARGET := shortest_edit_path-902
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
