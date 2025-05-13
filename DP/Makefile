@@ -19,8 +19,9 @@ endif
 # longest_common_sub_seq-897
 # shortest_edit_path-902
 # edit_path-899
+# range_dp_stone_combine-282
 
-TARGET := edit_path-899
+TARGET := range_dp_stone_combine-282
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
