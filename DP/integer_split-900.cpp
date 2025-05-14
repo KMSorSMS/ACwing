@@ -26,24 +26,25 @@
 #define N 1010
 #define MOD (1000000000 + 7)
 
-int f[N][N];
+int f[N];
 
 int main()
 {
 	int n;
 	std::cin >> n;
-	for(int i = 0; i <= n; i++) f[i][0] = 1;
+	// for(int i = 0; i <= n; i++) f[i][0] = 1;
+	f[0] = 1;
 	for(int i = 1; i <= n; i++)
 	{
 		for(int j = 1; j <= n; j++)
 		{
 			if(j >= i)
-				f[i][j] = (f[i - 1][j] + f[i][j - i]) % MOD;
+				f[j] = (f[j] + f[j - i]) % MOD;
 			else
-				f[i][j] = f[i - 1][j] % MOD;
+				f[j] = f[j] % MOD;
 		}
 	}
-	std::cout << f[n][n] << "\n";
+	std::cout << f[n] << "\n";
 }
 
 /*
