@@ -1,0 +1,134 @@
+/*
+杭州人称那些傻乎乎粘嗒嗒的人为 62（音：laoer）。
+
+杭州交通管理局经常会扩充一些的士车牌照，新近出来一个好消息，以后上牌照，不再含有不吉利的数字了，这样一来，就可以消除个别的士司机和乘客的心理障碍，更安全地服务大众。
+
+不吉利的数字为所有含有 4 或 62 的号码。例如：62315,73418,88914 都属于不吉利号码。但是，61152 虽然含有 6 和 2，但不是 连号，所以不属于不吉利数字之列。
+
+你的任务是，对于每次给出的一个牌照号区间 [n,m]，推断出交管局今后又要实际上给多少辆新的士车上牌照了。
+
+输入格式
+输入包含多组测试数据，每组数据占一行。
+
+每组数据包含一个整数对 n 和 m。
+
+当输入一行为“0 0”时，表示输入结束。
+
+输出格式
+对于每个整数对，输出一个不含有不吉利数字的统计个数，该数值占一行位置。
+
+数据范围
+1≤n≤m≤10^9
+
+输入样例：
+1 100
+0 0
+输出样例：
+80
+*/
+
+#include <cmath>
+// #include <cstdio>
+// #include <cstdio>
+#include <iostream>
+#include <vector>
+#define N 10
+// f[i][j] 代表，以 i 开头，长度为 j 的数字中，不吉利数字的个数
+int f[10][N];
+
+inline void init()
+{
+	f[4][1] = 1;
+	for(int j = 2; j < N; j++)
+	{
+		for(int i = 0; i <= 9; i++)
+		{
+			if(i == 4) { f[i][j] = static_cast<int>(std::pow(10, j - 1)); }
+			else
+			{
+				// if(i == 6) printf("f[%d][%d]:%d\n", i, j, f[i][j]);
+				for(int range = 0; range <= 9; range++)
+				{
+					// if(i == 6) printf("range: f[%d][%d]:%d\n", range, j - 1, f[range][j - 1]);
+					f[i][j] += f[range][j - 1];
+				}
+				if(i == 6)
+				{
+					// printf("f[%d][%d]:%d\n", i, j, f[i][j]);
+					f[i][j] += (static_cast<int>(std::pow(10, j - 2)) - f[2][j - 1]);
+					// printf("f[%d][%d]:%d\n", i, j, f[i][j]);
+					// printf("f[%d][%d]:%d\n", 2, j - 1, f[2][j - 1]);
+					// for(int range = 0; range <= 9; range++)
+					// {
+					// 	printf("f[%d][%d]:%d\n", range, j - 1, f[range][j - 1]);
+					// }
+				}
+			}
+		}
+	}
+	// for(int i = 0; i <= 9; i++)
+	// {
+	// 	for(int j = 2; j < N; j++) { printf("f[%d][%d]:%d\n", i, j, f[i][j]); }
+	// }
+}
+
+inline int DP(int x)
+{
+	std::vector<int> nums_reverse;
+	if(x == 0) return 0;
+	int x_ = x;
+	while(x != 0)
+	{
+		nums_reverse.push_back(x % 10);
+		x /= 10;
+	}
+	int i = nums_reverse.size() - 1, result = 0, is_bad = 0, former = 0;
+	// 处理前导数字
+	// for(int i=1;i<=9)
+	for(; i >= 0; i--)
+	{
+		int digit = nums_reverse[i];
+		if(digit > 0)
+		{
+			// if(leading != 1)
+			// {
+			// 	for(int len = i; len >= 1; len--)
+			// 	{
+			// 		for(int range = 1; range <= 9; range++) { result += f[range][len]; }
+			// 	}
+			// }
+			if(digit == 4 || (former == 6 && digit == 2)) is_bad = 1;
+			for(int i_in = digit - 1; i_in >= 0; i_in--)
+			{
+				if(former == 6 && i_in == 2)
+					result += static_cast<int>(std::pow(10, i));
+				else
+					result += f[i_in][i + 1];
+				// printf("f[%d][%d]:%d\n", i_in, i + 1, f[i_in][i + 1]);
+			}
+		}
+		former = digit;
+		if(is_bad == 1)
+		{
+			result += x_ % static_cast<int>(std::pow(10, i)) + 1;
+			break;
+		}
+		// leading = 1;
+	}
+	// printf("result is: %d\n", result);
+	return result;
+}
+
+int main()
+{
+	int n, m;
+	init();
+	while(true)
+	{
+		std::cin >> n >> m;
+		if(m == 0 && n == 0) { break; }
+		std::cout << (m - n + 1) - (DP(m) - DP(n - 1)) << "\n";
+	}
+
+	return 0;
+}
