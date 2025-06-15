@@ -42,50 +42,110 @@
 294 1256 296 296 296 296 287 286 286 247
 */
 
+#include <cmath>
+// #include <cstdio>
+#include <cstring>
 #include <iostream>
+#include <utility>
+#include <vector>
+#define N 10
+// f[i][j][k]代表最高位是 i，长度为 j 的数字中，k 的出现次数
+int f[10][N][10];
 
-// 在 1～n的范围里面，找数字 x 出现的次数
-inline int find_n_x(int n,int x){
-    // x 为 0 分开
-    if(x == 0){
-
-    }else{// x 不为 0
-        // 截取位数
-
-    }
+inline void init()
+{
+	for(int i = 0; i <= 9; i++) { f[i][1][i] = 1; }
+	for(int j = 2; j < N; j++)
+	{
+		for(int i = 0; i <= 9; i++)
+		{
+			for(int k = 0; k <= 9; k++)
+			{
+				for(int range = 0; range <= 9; range++) { f[i][j][k] += f[range][j - 1][k]; }
+				if(i == k) { f[i][j][k] += (int)pow(10, j - 1); }
+			}
+		}
+	}
 }
 
-int main(){
-    int a,b;
-    while(1){
-        std::cin >> a >> b;
-        if(a==0 && b==0){
-            break;
-        }
+inline void DP(int x, int* result)
+{
+	std::vector<int> nums_reverse;
+	// 记录本身这个数字的各个位里面的数字有多少个
+	int result_num[10];
+	memset(result_num, 0, sizeof(result_num));
+	if(x == 0) return;
+	while(x != 0)
+	{
+		nums_reverse.push_back(x % 10);
+		x /= 10;
+	}
+	int j = nums_reverse.size() - 1, is_leading = 0;
+	for(; j >= 0; j--)
+	{
+		int digit = nums_reverse[j];
+		// printf("digit is: %d,j is: %d \n", digit, j);
+		// fflush(stdout);
+		if(digit > 0)
+		{
+			if(is_leading != 1)
+			{
+				// printf("no leading\n");
+				for(int len = j; len >= 1; len--)
+				{
+					for(int i = 1; i <= 9; i++)
+					{
+						for(int k = 0; k <= 9; k++)
+						{
+							// printf("f[%d][%d][%d]:%d\n", i, len, k, f[i][len][k]);
+							result[k] += f[i][len][k];
+						}
+					}
+				}
+			}
+			// printf("the normal\n");
+			for(int i = digit - 1; i + is_leading >= 1; i--)
+			{
+				for(int k = 0; k <= 9; k++)
+				{
+					// printf("f[%d][%d][%d]:%d\n", i, j + 1, k, f[i][j + 1][k]);
+					result[k] += f[i][j + 1][k] + result_num[k] * (int)pow(10, j);
+				}
+			}
+		}
+		is_leading = 1;
+		result_num[digit]++;
+	}
+	for(int k = 0; k <= 9; k++) { result[k] += result_num[k]; }
+}
 
-
-    }
-    return 0;
+int main()
+{
+	int a = 0, b = 0;
+	init();
+	// printf("after init\n");
+	int result_l[10], result_r[10];
+	while(true)
+	{
+		memset(result_l, 0, sizeof(result_l));
+		memset(result_r, 0, sizeof(result_r));
+		// printf("input \n");
+		std::cin >> a >> b;
+		// printf("a is %d , b is %d\n", a, b);
+		// fflush(stdout);
+		if(a == 0 && b == 0) { break; }
+		if(a > b) std::swap(a, b);
+		DP(a - 1, result_l);
+		DP(b, result_r);
+		// printf("after DP\n");
+		for(int i = 0; i <= 9; i++) { std::cout << result_r[i] - result_l[i] << " "; }
+		std::cout << "\n";
+	}
+	return 0;
 }
 
 /*
 思路：
-目标是得到f[n][i] (0 <= i <= 9)表示，从 1～n 之间数字 i 出现的次数
-我们通过数位统计的方法来实现：
-对于数字 n，写为一串数字：abcdefgh,我们来数第 4 位 的 3 的个数，我们的方法是：
-1. 高 4 位的情况是，0000 ~ abcd - 1，那么对  fgh 就可以从 000～999均可，（10^3)。总共就是 abcd * (10^3)
-2. 高 4 位的情况是，abcd
-    2.1 e <  3 时，abcdexxx一定比abcd3xxx 小，所以不可能，为 0
-    2.2 e == 3 时，abcd3fgh需要比abcd3xxx 小，所以为 000～fgh,有 fgh+1种选法
-    2.3 e > 3  时，abcdexxx 都比abcd3fgh 大，所以有 000～999，共(10^3)种选法
-
-这里需要注意边界情况，第一个是，前导 0
-对于 1. 就需要从 0001 ～ abcd - 1 总共就是 (abcd - 1) * (10^3)
-对   2. 那么就只有
-            2.2 e == 0, abcd0fgh需要比 abcd0xxx 小，所以有 000～fgh,共 fgh+1 种选法
-            2.3 e >  0, abcd0fgh 都比 abcdexxx 小，所以有000～999 共 (10^3)种选法
-
-https://www.acwing.com/video/420/
+主要是预处理，这部分很关键，主要难点在已知高位的情况下，除了通过下一位的已知来更新之外，还要去通过当前位数，来更新一下高位加上之后的数量
+这种处理同样在分类里面也有有，所以需要记录当前数字前面的情况，然后根据这些情况进行加法处理
 */
-
-
