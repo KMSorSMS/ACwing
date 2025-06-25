@@ -11,8 +11,9 @@ endif
 
 # 合并果子-148
 # 区间选点-905
+# 最大不相交区间数量-908
 
-TARGET := 区间选点-905
+TARGET := 最大不相交区间数量-908
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
