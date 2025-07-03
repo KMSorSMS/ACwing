@@ -23,6 +23,7 @@
 #include <algorithm>
 // #include <cstdio>
 #include <iostream>
+#include <queue>
 #include <utility>
 #include <vector>
 typedef std::pair<int, int> pii;
@@ -38,29 +39,20 @@ int main()
 		std::cin >> a >> b;
 		ranges.push_back({a, b});
 	}
-	int count = 0;
-	while(!ranges.empty())
+	std::sort(ranges.begin(), ranges.end(), [](pii a, pii b) { return a.second > b.second; });
+	std::priority_queue<int, std::vector<int>> left_max;
+	left_max.push(ranges.begin()->second + 1);
+
+	// printf("the new begin is: %d\n", ranges.begin()->first);
+	for(auto range = ranges.begin(); range != ranges.end(); range++)
 	{
-		std::sort(ranges.begin(), ranges.end(), [](pii a, pii b) { return a.first > b.first; });
-		count++;
-		int left = ranges.begin()->first;
-		// printf("left is: %d\n", left);
-		ranges.erase(ranges.begin());
-		std::sort(ranges.begin(), ranges.end(), [](pii a, pii b) { return a.first > b.first; });
-
-		// printf("the new begin is: %d\n", ranges.begin()->first);
-		for(auto range = ranges.begin(); range != ranges.end();)
+		if(range->second < left_max.top())
 		{
-
-			if(range->second < left)
-			{
-				left = range->first;
-				// printf("the new left is %d\n", left);
-				range = ranges.erase(range);
-			}
-			else { range++; }
+			left_max.pop();
+			left_max.push(range->first);
 		}
+		else { left_max.push(range->first); }
 	}
-	std::cout << count << "\n";
+	std::cout << left_max.size() << "\n";
 	return 0;
 }
