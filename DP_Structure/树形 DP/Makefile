@@ -9,8 +9,9 @@ else
 endif
 
 # 树的最长路径-1072
+# 树的中心-1073
 
-TARGET := 树的最长路径-1072
+TARGET := 树的中心-1073
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
