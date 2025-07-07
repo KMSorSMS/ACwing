@@ -8,12 +8,9 @@ else
     DEBUGGER := gdb
 endif
 
-# U412490数数
-# U412534公司
-# U419307毕业照
-# U560763_Movie
+# 格子游戏-1250
 
-TARGET := U560763_Movie
+TARGET := 格子游戏-1250
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
