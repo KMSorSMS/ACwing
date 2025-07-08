@@ -9,8 +9,9 @@ else
 endif
 
 # 格子游戏-1250
+# 搭配购买-1252
 
-TARGET := 格子游戏-1250
+TARGET := 搭配购买-1252
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
