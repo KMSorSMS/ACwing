@@ -32,8 +32,8 @@ Joe觉得云朵很美，决定去山上的商店买一些云朵。
 输出样例：
 1
 */
-#include <algorithm>
-#include <cstdio>
+// #include <algorithm>
+// #include <cstdio>
 #include <iostream>
 #define N 10010
 #define W 10010
@@ -41,7 +41,7 @@ int a[N], value[N], cost[N];
 int values_[N], costs_[N];
 bool added[N];
 // f[i][j] 是前 i 个商品里面，体积不超过 j 的最大价值
-int f[N][W];
+int f[W];
 // int class_set[N],nums;
 
 int find(int node)
@@ -84,18 +84,19 @@ int main()
 	// printf("idx:%d\n", idx);
 	for(int i = 1; i <= idx; i++)
 	{
-		for(int j = 1; j <= w; j++)
+		for(int j = w; j >= costs_[i]; j--)
 		{
+			f[j] = f[j - costs_[i]] + values_[i] > f[j] ? f[j - costs_[i]] + values_[i] : f[j];
 
-			f[i][j] = f[i - 1][j];
-			if(costs_[i] <= j)
-			{
-				f[i][j] = f[i][j] > (f[i - 1][j - costs_[i]] + values_[i])
-							  ? f[i][j]
-							  : (f[i - 1][j - costs_[i]] + values_[i]);
-			}
+			// f[i][j] = f[i - 1][j];
+			// if(costs_[i] <= j)
+			// {
+			// 	f[i][j] = f[i][j] > (f[i - 1][j - costs_[i]] + values_[i])
+			// 				  ? f[i][j]
+			// 				  : (f[i - 1][j - costs_[i]] + values_[i]);
+			// }
 		}
 	}
-	std::cout << f[idx][w] << "\n";
+	std::cout << f[w] << "\n";
 	return 0;
 }
