@@ -29,69 +29,80 @@ N≤10^9,M≤5000
 3
 */
 
+// #include <cstdio>
 #include <iostream>
-#include <string>
 #include <unordered_map>
-#include <utility>
-std::unordered_map<int, int> ranges_l;
-std::unordered_map<int, int> ranges_r;
-std::unordered_map<std::pair<int, int>, int> if_odd;
+#define N 10010
+using namespace std;
+unordered_map<int, int> class_map;
+int idx = 1;
+int p[N], d[N];
 
+int find(int x)
+{
+	if(p[x] != x)
+	{
+		int t = find(p[x]);
+		d[x] = (d[x] + d[p[x]]) % 2;
+		p[x] = t;
+	}
+	return p[x];
+}
 
 int main()
 {
 	int n, m;
-	std::cin >> n >> m;
-	for(int i = 1; i <= m; i++)
+	cin >> n >> m;
+	bool if_right = true;
+	int ans = m;
+	for(int i = 0; i <= 2 * m; i++)
+	{
+		p[i] = i;
+		d[i] = 0;
+	}
+	for(int i = 0; i < m; i++)
 	{
 		int l, r;
-		std::string op;
-		std::cin >> l >> r >> op;
-		int even_odd = 0;
-		if(op == "even")
-			even_odd = 0;
-		else
-			even_odd = 1; //代表奇数
-
-		if(if_odd.count({l, r}) && if_odd[{l, r}] != even_odd)
+		string op;
+		cin >> l >> r >> op;
+		if(if_right)
 		{
-			std::cout << i << "\n";
-			break;
-		}
-		else { ranges_l[l] = r, ranges_r[r] = l, if_odd[{l, r}] = even_odd; }
-		int l_l = l, r_r = r, even_odd_l = 0, even_odd_r = 0;
-		if(ranges_r.count(l - 1))
-		{
-			int even_odd_l = even_odd;
-			even_odd_l = if_odd[{ranges_r[l - 1], l - 1}];
-			l_l = ranges_r[l - 1];
-			if(if_odd.count({l_l, r}) && if_odd[{l_l, r}] != (even_odd_l ^ even_odd))
+			l = l - 1;
+			if(class_map.count(l) == 0) class_map[l] = idx++;
+			if(class_map.count(r) == 0) class_map[r] = idx++;
+			int l_idx = class_map[l], r_idx = class_map[r];
+			int l_class = find(l_idx), r_class = find(r_idx);
+			if(op == "even")
 			{
-				std::cout << i << "\n";
-				break;
+				// printf("l_class is %d,r_class is %d, l_idx %d,r_idx %d\n",
+				// 	   l_class,
+				// 	   r_class,
+				// 	   l_idx,
+				// 	   r_idx);
+				if(l_class != r_class)
+				{
+					p[r_class] = l_class;
+					d[r_class] = (d[l_idx] + 2 - d[r_idx]) % 2;
+				}
+				else if((d[l_idx] % 2) != (d[r_idx] % 2)) { if_right = false, ans = i; }
+				// printf("d[l_idx]:%d,d[r_idx]:%d\n", d[l_idx], d[r_idx]);
 			}
 			else
 			{
-				ranges_l[l_l] = r, ranges_r[r] = l_l,
-				if_odd[{l_l, r_r}] = (even_odd ^ even_odd_l ^ even_odd_r);
+				// printf("l_class is %d,r_class is %d, l_idx %d,r_idx %d\n",
+				// 	   l_class,
+				// 	   r_class,
+				// 	   l_idx,
+				// 	   r_idx);
+				if(l_class != r_class)
+				{
+					p[r_class] = l_class;
+					d[r_class] = (d[l_idx] + 3 - d[r_idx]) % 2;
+				}
+				else if((d[l_idx] + 1) % 2 != (d[r_idx]) % 2) { if_right = false, ans = i; }
+				// printf("d[l_idx]:%d,d[r_idx]:%d\n", d[l_idx], d[r_idx]);
 			}
 		}
-		if(ranges_l.count(r + 1))
-		{
-			even_odd_r = if_odd[{r + 1, ranges_l[r + 1]}];
-			r_r = ranges_l[r + 1];
-			if(if_odd.count({l, r_r}) && if_odd[{l, r_r}] != (even_odd_r ^ even_odd))
-			{
-				std::cout << i << "\n";
-				break;
-			}
-		}
-		if(if_odd.count({l_l, r_r}) && if_odd[{l_l, r_r}] != (even_odd ^ even_odd_l ^ even_odd_r))
-		{
-			std::cout << i << "\n";
-			break;
-		}
-		ranges_l[l_l] = r_r, ranges_r[r_r] = l_l,
-		if_odd[{l_l, r_r}] = (even_odd ^ even_odd_l ^ even_odd_r);
 	}
+	cout << ans << "\n";
 }
