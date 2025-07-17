@@ -13,8 +13,9 @@ endif
 # 程序自动分析-237
 # 食物链-240
 # 奇偶游戏-239
+# 银河英雄传说-238
 
-TARGET := 奇偶游戏-239
+TARGET := 银河英雄传说-238
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
