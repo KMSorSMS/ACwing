@@ -34,7 +34,6 @@ C 4 2
 1
 */
 
-// #include <cstdio>
 #include <iostream>
 #include <utility>
 #define N 30010
@@ -44,10 +43,8 @@ typedef std::pair<int, int> pii;
 pii find_(int x)
 {
 	int depth_ = depth[x];
-	// printf("p[x]:%d,x:%d\n", p[x], x);
 	if(p[x] != x)
 	{
-		// printf("p[x]:%d,x:%d\n", p[x], x);
 		pii t = find_(p[x]);
 		depth_ += t.second;
 		p[x] = t.first;
@@ -69,13 +66,6 @@ int main()
 		std::cin >> op >> i_ >> j_;
 		pii i_class_pii = find_(i_), j_class_pii = find_(j_);
 		int i_class = i_class_pii.first, j_class = j_class_pii.first;
-		// printf("\ni_class:%d,i_class_depth:%d,j_class:%d,j_class_depth:%d,i_depth:%d,j_depth:%d\n",
-		// 	   i_class,
-		// 	   depth[i_class],
-		// 	   j_class,
-		// 	   depth[j_class],
-		// 	   depth[i_],
-		// 	   depth[j_]);
 		if(op == 'M')
 		{
 			if(i_class != j_class)
