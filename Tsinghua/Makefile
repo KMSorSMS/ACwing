@@ -18,8 +18,10 @@ endif
 # 3400统计次数
 # 4520质数
 # 1324五子棋
+# 1329文件系统
+# 1336矩阵
 
-TARGET := 1324五子棋
+TARGET := 1336矩阵
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
