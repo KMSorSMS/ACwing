@@ -10,8 +10,9 @@ endif
 
 # 1112迷宫
 # 1113红与黑
+# 1113红与黑_dfs
 
-TARGET := 1113红与黑
+TARGET := 1113红与黑_dfs
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
