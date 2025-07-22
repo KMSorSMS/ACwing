@@ -10,8 +10,9 @@ endif
 
 # 1072树的最长路径
 # 1073树的中心
+# 1075数字转换
 
-TARGET := 1073树的中心
+TARGET := 1075数字转换
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
