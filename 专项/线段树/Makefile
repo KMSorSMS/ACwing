@@ -8,8 +8,9 @@ else
     DEBUGGER := gdb
 endif
 
+# 1275最大数
 
-TARGET := 银河英雄传说-238
+TARGET := 1275最大数
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
