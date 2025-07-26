@@ -9,8 +9,9 @@ else
 endif
 
 # 1275最大数
+# 245你能回答这些问题吗
 
-TARGET := 1275最大数
+TARGET := 245你能回答这些问题吗
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
