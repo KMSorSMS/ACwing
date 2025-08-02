@@ -84,7 +84,11 @@ int main()
 		cin >> a >> b >> c;
 		edges[i] = {c, {a, b}};
 	}
-	sort(edges + 1, edges + m + 1);
+	// sort(edges + 1, edges + m + 1);
+	// Lambda 表达式
+	sort(edges + 1, edges + m + 1, [](const pair<int, pii>& a, const pair<int, pii>& b) {
+		return a.first < b.first; // 按first升序
+	});
 	pii res = krus();
 	if(res.second != n - 1)
 	{
@@ -94,3 +98,6 @@ int main()
 	else { cout << res.first << "\n"; }
 	return 0;
 }
+/*
+只需要排序一次,用 sort 函数即可,注意看一下 sort 函数的用法,可以自定义比较器
+*/
