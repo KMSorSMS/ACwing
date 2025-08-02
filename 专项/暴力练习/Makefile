@@ -10,8 +10,12 @@ endif
 
 # 849Dijkstra求最短路I
 # 850Dijkstra求最短路II
+# 854Floyd求最短路
+# P8815逻辑表达式
+# 3302表达式求值
+# P8815逻辑表达式_imp
 
-TARGET := 850Dijkstra求最短路II
+TARGET := P8815逻辑表达式_imp
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
