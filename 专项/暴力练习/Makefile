@@ -14,8 +14,9 @@ endif
 # P8815逻辑表达式
 # 3302表达式求值
 # P8815逻辑表达式_imp
+# 799最长连续不重复子序列
 
-TARGET := P8815逻辑表达式_imp
+TARGET := 799最长连续不重复子序列
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
