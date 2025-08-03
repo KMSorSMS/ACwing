@@ -20,8 +20,9 @@ endif
 # 859Kruskal算法求最小生成树
 # test
 # 846树的重心
+# 847图中点的层次
 
-TARGET := 846树的重心
+TARGET := 847图中点的层次
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
