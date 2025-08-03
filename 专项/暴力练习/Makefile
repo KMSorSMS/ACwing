@@ -21,8 +21,9 @@ endif
 # test
 # 846树的重心
 # 847图中点的层次
+# 848有向图的拓扑序列
 
-TARGET := 847图中点的层次
+TARGET := 848有向图的拓扑序列
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
