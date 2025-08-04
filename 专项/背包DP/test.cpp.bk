@@ -1,0 +1,212 @@
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <iterator>
+#include <queue>
+#include <utility>
+using namespace std;
+
+typedef pair<int, int> pii;
+typedef pair<pii, pii> pos;
+typedef pair<pos, int> full_pos;
+const int M = 510, N = 510;
+
+char graph[N][M];
+bool st[N][M];
+//
+bool lay_st_left_right[N][M][M];
+bool lay_st_up_down[M][N][N];
+// stat（int） 为 1 代表竖着，2 代表躺着，竖着的时候只有第一个坐标有效
+int up_dir[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+int down_dir[4][2] = {{-2, 0}, {2, 0}, {0, -2}, {0, 2}};
+
+int n, m, start_x1, start_y1, start_x2, start_y2, end_x, end_y, op_begin;
+
+int bfs()
+{
+	queue<pair<full_pos, int>> que;
+	// 最后一项是深度
+	que.push({{{{start_x1, start_y1}, {start_x2, start_y2}}, op_begin}, 0});
+	while(que.size())
+	{
+		int depth = que.front().second;
+		int op = que.front().first.second;
+		pos position = que.front().first.first;
+		que.pop();
+		if(op == 1)
+		{
+			// 当前是立着的
+			pii first_pos = position.first;
+			// 找到目的地
+			if(first_pos.first == end_x && first_pos.second == end_y) { return depth; }
+			if(st[first_pos.first][first_pos.second]) continue;
+			// printf("up find first:%d,%d,depth:%d\n", first_pos.first, first_pos.second, depth);
+			st[first_pos.first][first_pos.second] = true;
+			// 可以查看能走哪里
+			// // 立着走
+			// for(int i = 0; i < 4; i++)
+			// {
+			// 	int next_x = first_pos.first + up_dir[i][0],
+			// 		next_y = first_pos.second + up_dir[i][1];
+			// 	if(next_x <= n && next_x >= 1 && next_y <= m && next_y >= 1 &&
+			// 	   (graph[next_x][next_y] == '.' || graph[next_x][next_y] == 'O'))
+			// 	{
+			// 		que.push({{{{next_x, next_y}, {0, 0}}, 1}, depth + 1});
+			// 		printf("add (%d,%d)\n", next_x, next_y);
+			// 	}
+			// }
+			// 横着走
+			for(int i = 0; i < 4; i++)
+			{
+				int next_x1 = first_pos.first + up_dir[i][0],
+					next_x2 = first_pos.first + down_dir[i][0],
+					next_y1 = first_pos.second + up_dir[i][1],
+					next_y2 = first_pos.second + down_dir[i][1];
+				if(next_x1 <= n && next_x2 <= n && next_x1 >= 1 && next_x2 >= 1 && next_y1 <= m &&
+				   next_y2 <= m && next_y1 >= 1 && next_y2 >= 1 && graph[next_x1][next_y1] != '#' &&
+				   graph[next_x2][next_y2] != '#')
+				{
+					que.push({{{{next_x1, next_y1}, {next_x2, next_y2}}, 2}, depth + 1});
+					// printf("add (%d,%d),(%d,%d)\n", next_x1, next_y1, next_x2, next_y2);
+				}
+			}
+		}
+		else
+		{
+			// 当前是横着的
+			pii first_pos = position.first;
+			pii second_pos = position.second;
+			if(first_pos.first == second_pos.first)
+			{
+				// 左右
+				// 测试两种立起来的情况
+				int right = max(first_pos.second, second_pos.second);
+				int left = min(first_pos.second, second_pos.second);
+				if(lay_st_left_right[first_pos.first][left][right]) continue;
+				// printf("down find first:(%d,%d),(%d,%d),depth:%d \n",
+				// 	   first_pos.first,
+				// 	   first_pos.second,
+				// 	   second_pos.first,
+				// 	   second_pos.second,
+				// 	   depth);
+				lay_st_left_right[first_pos.first][left][right] = true;
+				int next_x = first_pos.first, next_y = right + 1;
+				if(next_x <= n && next_x >= 1 && next_y <= m && next_y >= 1 &&
+				   (graph[next_x][next_y] == '.' || graph[next_x][next_y] == 'O'))
+				{
+					que.push({{{{next_x, next_y}, {0, 0}}, 1}, depth + 1});
+				}
+				next_y = left - 1;
+				if(next_x <= n && next_x >= 1 && next_y <= m && next_y >= 1 &&
+				   (graph[next_x][next_y] == '.' || graph[next_x][next_y] == 'O'))
+				{
+					que.push({{{{next_x, next_y}, {0, 0}}, 1}, depth + 1});
+				}
+				// 测试两种躺起的方法
+				int next_x1 = first_pos.first - 1, next_x2 = first_pos.first - 1,
+					next_y1 = first_pos.second, next_y2 = second_pos.second;
+				if(next_x1 <= n && next_x2 <= n && next_x1 >= 1 && next_x2 >= 1 && next_y1 <= m &&
+				   next_y2 <= m && next_y1 >= 1 && next_y2 >= 1 && graph[next_x1][next_y1] != '#' &&
+				   graph[next_x2][next_y2] != '#')
+				{
+					que.push({{{{next_x1, next_y1}, {next_x2, next_y2}}, 2}, depth + 1});
+					// printf("add (%d,%d),(%d,%d)\n", next_x1, next_y1, next_x2, next_y2);
+				}
+				next_x1 = first_pos.first + 1, next_x2 = first_pos.first + 1;
+				if(next_x1 <= n && next_x2 <= n && next_x1 >= 1 && next_x2 >= 1 && next_y1 <= m &&
+				   next_y2 <= m && next_y1 >= 1 && next_y2 >= 1 && graph[next_x1][next_y1] != '#' &&
+				   graph[next_x2][next_y2] != '#')
+				{
+					que.push({{{{next_x1, next_y1}, {next_x2, next_y2}}, 2}, depth + 1});
+					// printf("add (%d,%d),(%d,%d)\n", next_x1, next_y1, next_x2, next_y2);
+				}
+			}
+			else
+			{
+				// 测试两种立起来的情况
+				int down = max(first_pos.first, second_pos.first);
+				int up = min(first_pos.first, second_pos.first);
+				if(lay_st_up_down[first_pos.second][up][down]) continue;
+				// printf("down find first:(%d,%d),(%d,%d),depth:%d \n",
+				// 	   first_pos.first,
+				// 	   first_pos.second,
+				// 	   second_pos.first,
+				// 	   second_pos.second,
+				// 	   depth);
+				lay_st_up_down[first_pos.second][up][down] = true;
+				int next_y = first_pos.second, next_x = down + 1;
+				if(next_x <= n && next_x >= 1 && next_y <= m && next_y >= 1 &&
+				   (graph[next_x][next_y] == '.' || graph[next_x][next_y] == 'O'))
+				{
+					que.push({{{{next_x, next_y}, {0, 0}}, 1}, depth + 1});
+				}
+				next_x = up - 1;
+				if(next_x <= n && next_x >= 1 && next_y <= m && next_y >= 1 &&
+				   (graph[next_x][next_y] == '.' || graph[next_x][next_y] == 'O'))
+				{
+					que.push({{{{next_x, next_y}, {0, 0}}, 1}, depth + 1});
+				}
+				// 测试两种躺起的方法
+				int next_y1 = first_pos.second - 1, next_y2 = first_pos.second - 1,
+					next_x1 = first_pos.first, next_x2 = second_pos.first;
+				if(next_x1 <= n && next_x2 <= n && next_x1 >= 1 && next_x2 >= 1 && next_y1 <= m &&
+				   next_y2 <= m && next_y1 >= 1 && next_y2 >= 1 && graph[next_x1][next_y1] != '#' &&
+				   graph[next_x2][next_y2] != '#')
+				{
+					que.push({{{{next_x1, next_y1}, {next_x2, next_y2}}, 2}, depth + 1});
+					// printf("add (%d,%d),(%d,%d)\n", next_x1, next_y1, next_x2, next_y2);
+				}
+				next_y1 = first_pos.second + 1, next_y2 = first_pos.second + 1;
+				if(next_x1 <= n && next_x2 <= n && next_x1 >= 1 && next_x2 >= 1 && next_y1 <= m &&
+				   next_y2 <= m && next_y1 >= 1 && next_y2 >= 1 && graph[next_x1][next_y1] != '#' &&
+				   graph[next_x2][next_y2] != '#')
+				{
+					que.push({{{{next_x1, next_y1}, {next_x2, next_y2}}, 2}, depth + 1});
+					// printf("add (%d,%d),(%d,%d)\n", next_x1, next_y1, next_x2, next_y2);
+				}
+			}
+		}
+	}
+	return -1;
+}
+
+int main()
+{
+	int t;
+	cin >> t;
+	for(int t_ = 1; t_ <= t; t_++)
+	{
+		cin >> n >> m;
+		memset(graph, 0, sizeof(graph));
+		start_x1 = 0, start_y1 = 0, start_x2 = 0, start_y2 = 0, end_x = 0, end_y = 0, op_begin = 0;
+		memset(lay_st_left_right, 0, sizeof(lay_st_left_right));
+		memset(lay_st_up_down, 0, sizeof(lay_st_up_down));
+		memset(st, 0, sizeof(st));
+
+		for(int i = 1; i <= n; i++)
+		{
+			for(int j = 1; j <= m; j++)
+			{
+				cin >> graph[i][j];
+				if(graph[i][j] == 'X')
+				{
+					if(start_x1 == 0)
+					{
+						start_x1 = i, start_y1 = j;
+						op_begin = 1;
+					}
+					else
+					{
+						start_x2 = i, start_y2 = j;
+						op_begin = 2;
+					}
+				}
+				else if(graph[i][j] == 'O') { end_x = i, end_y = j; }
+			}
+		}
+		// printf("before bfs\n");
+		int res = bfs();
+		cout << res << "\n";
+	}
+	return 0;
+}

@@ -22,8 +22,9 @@ endif
 # 846树的重心
 # 847图中点的层次
 # 848有向图的拓扑序列
+# 173矩阵距离
 
-TARGET := 848有向图的拓扑序列
+TARGET := 173矩阵距离
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
