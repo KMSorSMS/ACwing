@@ -26,4 +26,39 @@
 10
 */
 
+#include <algorithm>
+#include <cstdio>
+#include <iostream>
+using namespace std;
+const int N = 1e4 + 10, V = 1e3 + 10;
+int v_s[N], w_s[N];
+int f[V];
+int idx = 0;
+int v, n;
 
+void add_package(int v_, int w_)
+{
+	while(v_ <= v)
+	{
+		idx++;
+		v_s[idx] = v_, w_s[idx] = w_;
+		v_ *= 2, w_ *= 2;
+	}
+}
+
+int main()
+{
+	cin >> n >> v;
+	for(int i = 1; i <= n; i++)
+	{
+		int v_, w_;
+		cin >> v_ >> w_;
+		add_package(v_, w_);
+	}
+	for(int i = 1; i <= idx; i++)
+	{
+		for(int j = v; j >= v_s[i]; j--) { f[j] = max(f[j], f[j - v_s[i]] + w_s[i]); }
+	}
+	cout << f[v] << "\n";
+	return 0;
+}
