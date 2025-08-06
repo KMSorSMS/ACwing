@@ -11,8 +11,9 @@ endif
 # 2_01背包问题
 # test
 # 3完全背包问题
+# 4多重背包问题I
 
-TARGET := 3完全背包问题
+TARGET := 4多重背包问题I
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
