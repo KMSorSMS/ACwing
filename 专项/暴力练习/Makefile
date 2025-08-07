@@ -26,8 +26,9 @@ endif
 # 173矩阵距离_imp
 # 843n-皇后问题
 # 853有边数限制的最短路
+# 851spfa求最短路
 
-TARGET := 853有边数限制的最短路
+TARGET := 851spfa求最短路
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
