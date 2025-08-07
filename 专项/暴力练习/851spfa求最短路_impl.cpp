@@ -52,13 +52,18 @@ void spfa(int start)
 	{
 		int node = que.front();
 		que.pop();
+		st[node] = false;
 		for(int edge = h[node]; edge != 0; edge = ne[edge])
 		{
 			int node_next = e[edge];
 			if(dist[node_next] > dist[node] + w[edge])
 			{
 				dist[node_next] = dist[node] + w[edge];
-				que.push(node_next);
+				if(!st[node_next])
+				{
+					que.push(node_next);
+					st[node_next] = true;
+				}
 			}
 		}
 	}
