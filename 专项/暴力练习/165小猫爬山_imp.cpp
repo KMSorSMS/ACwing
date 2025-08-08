@@ -42,6 +42,7 @@ int min_ = 0x3f3f3f3f;
 
 void dfs(int depth, int pack)
 {
+	// 最优性剪枝
 	if(pack >= min_) return;
 	if(depth > n) min_ = pack;
 	for(int i = 1; i <= pack; i++)
