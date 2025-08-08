@@ -64,7 +64,7 @@ int main()
 	cin >> n >> w;
 	for(int i = 1; i <= n; i++) { w_s[i] = w; }
 	for(int i = 1; i <= n; i++) { cin >> c_s[i]; }
-	sort(c_s + 1, c_s + n, [](int a, int b) { return a > b; });
+	sort(c_s + 1, c_s + n + 1, [](int a, int b) { return a > b; });
 	dfs(1, 1);
 	cout << min_ << "\n";
 	return 0;

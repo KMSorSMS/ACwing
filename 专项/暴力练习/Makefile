@@ -32,8 +32,10 @@ endif
 # 165小猫爬山
 # 165小猫爬山_imp
 # 166数独
+# 167木棒
+# 167木棒_imp
 
-TARGET := 166数独
+TARGET := 167木棒_imp
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
