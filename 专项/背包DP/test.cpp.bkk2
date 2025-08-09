@@ -1,0 +1,77 @@
+#include <algorithm>
+#include <cstdio>
+#include <iostream>
+#include <utility>
+
+using namespace std;
+// typedef long long ll;
+const int N = 1e4+10, D = 30;
+int q[N][D],K_[N][D],v[N][D],w[N];
+int res_qk[N][N];
+long long res[N][D];
+int n,d;
+
+// void debug_res_qk(){
+// 	for(int i=1;i<=n;i++){
+// 		for(int j=1;j<=n;j++){
+// 			printf("%d ",res_qk[i][j]);
+// 		}
+// 		printf("\n");
+// 	}
+// }
+
+void mat_mul_qkw(){
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+			for(int k=1;k<=d;k++){
+				res_qk[i][j] += q[i][k] * K_[j][k];
+			}
+			// res_qk[i][j] *= w[i];
+		}
+	}
+}
+
+void mat_mul_v(){
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=d;j++){
+			for(int k=1;k<=n;k++){
+				res[i][j] += (long long)res_qk[i][k] * v[k][j] * w[i];
+			}
+		}
+	}
+}
+
+int main(){
+	cin >> n >> d;
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=d;j++){
+			cin >> q[i][j];
+		}
+	}
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=d;j++){
+			cin >> K_[i][j];
+		}
+	}
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=d;j++){
+			cin >> v[i][j];
+		}
+	}
+	for(int i=1;i<=n;i++){
+		cin >> w[i];
+	}
+	mat_mul_qkw();
+	// printf("debug\n");
+	// debug_res_qk();
+	// printf("debug\n");
+	mat_mul_v();
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=d;j++){
+			cout << res[i][j] << " ";
+		}
+		cout << "\n";
+	}
+	return 0;
+}

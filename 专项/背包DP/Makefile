@@ -14,7 +14,7 @@ endif
 # 4多重背包问题I
 # 1064小国王_状态压缩DP
 
-TARGET := 1064小国王_状态压缩DP
+TARGET := test
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")

@@ -1,0 +1,74 @@
+#include <algorithm>
+#include <cstdio>
+#include <iostream>
+#include <utility>
+
+using namespace std;
+const int N = 2e3+10;
+const int M = 2*N;
+int dist[N][N];
+int dist1_[N];
+
+int h[N],e[M],ne[M],w[M];
+int idx=1,n,m,start_node;
+
+void add_edge(int a,int b,int c){
+	e[idx] = b,ne[idx] = h[a],w[idx] = c;
+	h[a] = idx++;
+}
+
+void cons_dist_dfs(int node,int fa){
+	for(int edge = h[node];edge!=0;edge = ne[edge]){
+		int next_node = e[edge];
+		if(next_node == fa) continue;
+		dist[start_node][next_node] = dist[start_node][node] + w[edge];
+		dist[next_node][start_node] = dist[start_node][node] + w[edge];
+		// printf("in dfs:node:%d dist[%d][%d]:%d,fa:%d:w_edge:%d\n",node,start_node,next_node,dist[start_node][next_node],fa,w[edge]);
+		cons_dist_dfs(next_node,node); 
+	}
+}
+
+void cons_dist1_dfs(int node,int fa){
+	for(int edge = h[node];edge!=0;edge = ne[edge]){
+		int next_node = e[edge];
+		if(next_node == fa) continue;
+		dist1_[next_node] = dist1_[node] + w[edge];
+		// printf("in dfs:node:%d dist[%d][%d]:%d,fa:%d:w_edge:%d\n",node,start_node,next_node,dist[start_node][next_node],fa,w[edge]);
+		cons_dist_dfs(next_node,node); 
+	}
+}
+
+
+int main(){
+	cin >> n >> m;
+	for(int i=1;i<=n-1;i++){
+		int a,b,c;
+		cin >> a >> b >> c;
+		add_edge(a,b,c);
+		add_edge(b,a,c);
+	}
+	for(int i=1;i<=n;i++){
+		// printf("term:%d\n",i);
+		start_node = i;
+		cons_dist_dfs(i,0);
+	}
+	// debug
+	// for(int i=1;i<=n;i++){
+	// 	printf("dist[1][%d]:%d\n",i,dist[1][i]);
+	// }
+	// debug end
+	for(int back=1;back<=m;back++){
+		int a,b,c;
+		cin >> a >> b >> c;
+		int res = 0;
+		for(int i = 1;i<=n;i++){
+			for(int j=i;j<=n;j++){
+				int dis_origin = dist[i][j];
+				int check_loose = min(dist[i][a]+dist[j][b]+c,dist[i][b]+dist[j][a]+c);
+				if(check_loose < dis_origin) res++;
+			}
+		}
+		cout << res << "\n";
+	}
+	return 0;
+}
