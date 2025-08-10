@@ -35,8 +35,9 @@ endif
 # 167木棒
 # 167木棒_imp
 # 1129热浪_单源最短路
+# 1128信使
 
-TARGET := test
+TARGET := 1128信使
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
