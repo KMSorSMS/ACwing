@@ -1,0 +1,110 @@
+#include <cstdio>
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <unordered_map>
+#include <queue>
+using namespace std;
+const int N = 1e5+10;
+typedef pair<int,int> pii;
+int q,n;
+struct Compare {
+    bool operator()(const pii &a, const pii &b) const {
+        if (a.first != b.first) {
+            return a.first < b.first;        // first 较大的排前
+        } else {
+            return a.second > b.second;      // first 相等时，second 较小的排前
+        }
+    }
+};
+
+vector<pii> seqs[N];
+// 数字->数量
+unordered_map<int,int> seqs_count[N];
+// 数量:数字，按照数量排序,最大的在第一个
+priority_queue<pii,vector<pii>,Compare> seqs_heap[N];
+
+
+int main(){
+	cin >> n >> q;
+	while(q--){
+		int op;
+		int i,k,x;
+		cin >> op;
+		if(op == 1){
+			cin >> i >> k >> x;
+			seqs[i].push_back({x,k});
+			seqs_count[i][x] += k;
+			seqs_heap[i].push({seqs_count[i][x],x});
+		}
+		else if(op == 2){
+			cin >> i >> k;
+			for(int index=seqs[i].size()-1;index>=0&&k>0;index--){
+				int counts = seqs[i][index].second,num = seqs[i][index].first;
+				if(counts > k){
+					counts -= k;
+					seqs[i][index].second = counts;
+					seqs_count[i][num] -= k;
+					seqs_heap[i].push({seqs_count[i][num],num});
+					k = 0;
+					break;
+				}
+				// printf("before check_size:%ld\n",seqs[i].size());
+				seqs[i].pop_back();
+				// printf("after check_size:%ld\n",seqs[i].size());
+				k -= counts;
+				seqs_count[i][num] -= counts;
+				// printf("seqs_count_num:%d,counts:%d\n",seqs_count[i][num],counts);
+				seqs_heap[i].push({seqs_count[i][num],num});
+			}
+		}
+		else{
+			cin >> i;
+			while(true){
+				if(seqs_heap[i].empty()) {
+					cout << "-1\n";
+					break;
+				}
+				int num_count = seqs_heap[i].top().first, num = seqs_heap[i].top().second;
+				if(seqs_count[i][num] != num_count) {
+					seqs_heap[i].pop();
+					continue;
+				}
+				if(num_count == 0){
+					cout << "-1\n";
+				}else{
+					cout << num << "\n";
+				}
+				break;
+			}
+		}
+	}
+	return 0;
+}
+
+
+/*
+2 6
+1 0 2 1
+1 0 3 2
+3 0
+2 0 1
+3 0
+3 1
+
+2 6
+1 0 2 1
+1 0 3 2
+3 0
+2 0 5
+3 0
+3 1
+
+2
+1
+-1
+
+
+
+?map 能不能排序
+*/
