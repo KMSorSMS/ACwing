@@ -39,8 +39,9 @@ endif
 # 1127香甜的黄油
 # 1127香甜的黄油_imp
 # 1127香甜的黄油_imp_dij
+# 1126最小花费
 
-TARGET := 1127香甜的黄油_imp_dij
+TARGET := 1126最小花费
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
