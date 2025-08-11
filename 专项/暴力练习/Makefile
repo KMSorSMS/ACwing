@@ -42,7 +42,7 @@ endif
 # 1126最小花费
 # 1126最小花费_spfa
 
-TARGET := 1126最小花费_spfa
+TARGET := test
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
