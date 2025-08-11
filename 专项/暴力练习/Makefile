@@ -41,8 +41,9 @@ endif
 # 1127香甜的黄油_imp_dij
 # 1126最小花费
 # 1126最小花费_spfa
+# 920最优乘车
 
-TARGET := test
+TARGET := 920最优乘车
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
