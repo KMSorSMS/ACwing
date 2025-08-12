@@ -42,8 +42,9 @@ endif
 # 1126最小花费
 # 1126最小花费_spfa
 # 920最优乘车
+# 903昂贵的聘礼
 
-TARGET := 920最优乘车
+TARGET := 903昂贵的聘礼
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
