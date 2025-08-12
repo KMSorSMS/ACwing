@@ -44,8 +44,9 @@ endif
 # 920最优乘车
 # 903昂贵的聘礼
 # 903昂贵的聘礼_dij
+# 1140最短网络_最小生成树
 
-TARGET := 903昂贵的聘礼_dij
+TARGET := 1140最短网络_最小生成树
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
