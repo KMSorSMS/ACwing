@@ -50,8 +50,9 @@ endif
 # 1142繁忙的都市
 # 1143联络员_kruscal
 # 1144连接格点
+# 1146新的开始
 
-TARGET := 1144连接格点
+TARGET := 1146新的开始
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
