@@ -47,8 +47,9 @@ endif
 # 1140最短网络_最小生成树
 # 1140最短网络_最小生成树_kruscal
 # 1141局域网_最小生成树_prim
+# 1142繁忙的都市
 
-TARGET := 1141局域网_最小生成树_prim
+TARGET := 1142繁忙的都市
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
