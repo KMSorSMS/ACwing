@@ -45,8 +45,9 @@ endif
 # 903昂贵的聘礼
 # 903昂贵的聘礼_dij
 # 1140最短网络_最小生成树
+# 1140最短网络_最小生成树_kruscal
 
-TARGET := 1140最短网络_最小生成树
+TARGET := 1140最短网络_最小生成树_kruscal
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
