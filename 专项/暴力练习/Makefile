@@ -54,8 +54,10 @@ endif
 # 1076迷宫问题
 # 188武士风度的牛
 # 1100抓住那头牛
+# 1107魔板
+# 1107魔板_impl
 
-TARGET := 1100抓住那头牛
+TARGET := 1107魔板_impl
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")

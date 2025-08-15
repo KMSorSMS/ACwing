@@ -1,0 +1,4 @@
+mkdir -p build
+mkdir -p build/debug
+g++ -std=c++11 -o build/1107魔板_impl 1107魔板_impl.cpp
+./build/1107魔板_impl
