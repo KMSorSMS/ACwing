@@ -56,8 +56,10 @@ endif
 # 1100抓住那头牛
 # 1107魔板
 # 1107魔板_impl
+# 175电路维修-双端队列广搜
+# 175电路维修-双端队列广搜_impl
 
-TARGET := 1107魔板_impl
+TARGET := 175电路维修-双端队列广搜
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
