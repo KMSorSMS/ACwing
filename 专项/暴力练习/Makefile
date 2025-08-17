@@ -58,8 +58,9 @@ endif
 # 1107魔板_impl
 # 175电路维修-双端队列广搜
 # 175电路维修-双端队列广搜_impl
+# 190字串变换-双向广搜
 
-TARGET := 175电路维修-双端队列广搜
+TARGET := 190字串变换-双向广搜
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")

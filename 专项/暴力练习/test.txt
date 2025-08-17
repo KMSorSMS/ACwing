@@ -1,2 +1,4 @@
-2 2
-1 1 2 1
+abcd xyz
+abc xu
+ud y
+y yz
