@@ -61,8 +61,9 @@ endif
 # 190字串变换-双向广搜
 # 1097池塘计数-bfs
 # 1098城堡问题
+# 1106山峰和山谷-bfs_flood
 
-TARGET := 1098城堡问题
+TARGET := 1106山峰和山谷-bfs_flood
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
