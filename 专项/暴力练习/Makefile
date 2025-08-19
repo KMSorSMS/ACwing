@@ -62,8 +62,9 @@ endif
 # 1097池塘计数-bfs
 # 1098城堡问题
 # 1106山峰和山谷-bfs_flood
+# 1172祖孙询问_最近公共祖先
 
-TARGET := 1106山峰和山谷-bfs_flood
+TARGET := 1172祖孙询问_最近公共祖先
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
