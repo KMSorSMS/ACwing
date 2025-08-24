@@ -20,8 +20,9 @@ endif
 # 1324五子棋
 # 1329文件系统
 # 1336矩阵
+# U419115售货机
 
-TARGET := 1336矩阵
+TARGET := U419115售货机
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
