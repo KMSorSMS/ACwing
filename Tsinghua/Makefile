@@ -22,8 +22,10 @@ endif
 # 1336矩阵
 # U419115售货机
 # U414310k叉树
+# U276782字符串
+# U414204总k次方差
 
-TARGET := U414310k叉树
+TARGET := U414204总k次方差
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
