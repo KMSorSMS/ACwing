@@ -24,8 +24,9 @@ endif
 # U414310k叉树
 # U276782字符串
 # U414204总k次方差
+# U414149考试
 
-TARGET := U414204总k次方差
+TARGET := U414149考试
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
