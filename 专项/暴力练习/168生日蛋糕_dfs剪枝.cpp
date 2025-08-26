@@ -16,6 +16,7 @@
 using namespace std;
 const int N = 1e4+10, M = 25;
 int n,m,res_min=0x3f3f3f3f;
+int v_min[M],q_min[M];
 
 
 int get_sqrt(int x){
@@ -39,17 +40,26 @@ void dfs(int depth, int h_i,int r_i,int v,int q){
     int r_u = r_i-1 > get_sqrt(n-v) ? get_sqrt(n-v):r_i-1;
     // 应该从大到小枚举，从底往上搜
     for(int r_i1=r_u;r_i1>=m-depth+1;r_i1--){
-        int h_u = (n-v) / r_i1/r_i1;
+        int h_u = (n-v) / r_i1 / r_i1;
         h_u = h_u < h_i - 1? h_u:h_i-1;
         for(int h_i1=h_i-1;h_i1>=m-depth+1;h_i1--){
             int v_new = v + r_i1*r_i1*h_i1;
             int q_new = q + 2*r_i1*h_i1;
             int v_remain = n - v_new;
-            if(v_remain > (m-depth)*(r_i1-1)*(r_i1-1)*(h_i1-1) || v_remain < 0) continue;
             if(depth==1) q_new += r_i1 * r_i1;
+            if(v_remain > (m-depth)*(r_i1-1)*(r_i1-1)*(h_i1-1) || v_remain < 0) continue;
+            if(v_new + v_min[m-depth] > n || q_new + q_min[m-depth] >= res_min) continue;
+            if(q_new + 2*v_remain/r_i1 >= res_min) continue;
             // printf("search:r: %d,h: %d\n",r_i1,h_i1);
             dfs(depth+1, h_i1,r_i1,v_new,q_new);
         }
+    }
+}
+
+void init(){
+    for(int i=1;i<=m;i++){
+        v_min[i] = v_min[i-1] + i*i;
+        q_min[i] = q_min[i-1] + 2*i;
     }
 }
 
