@@ -13,8 +13,9 @@ endif
 # 1192奖金
 # 164可达性统计
 # 164可达性统计_impl
+# 164可达性统计_impl2
 
-TARGET := 164可达性统计_impl
+TARGET := 164可达性统计_impl2
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
