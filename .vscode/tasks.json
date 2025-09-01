@@ -1,0 +1,34 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++",
+            "command": "/usr/bin/g++",
+
+            // 主要更改args参数
+            "args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"-I",
+				"${workspaceFolder}/include",
+				"${file}",
+				"-o",
+
+                // 这决定了可执行文件的输出位置，后面laucnh.json会用到
+				"${workspaceFolder}/bin/${fileBasenameNoExtension}"
+			],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "调试器生成的任务。"
+        }
+    ],
+    "version": "2.0.0"
+}
