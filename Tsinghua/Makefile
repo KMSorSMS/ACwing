@@ -30,8 +30,9 @@ endif
 # U416819擂台赛
 # U416829栈
 # U416829栈imple
+# U416838指针
 
-TARGET := U416829栈
+TARGET := U416838指针
 TARGET_file := $(wildcard $(TARGET).c $(TARGET).cpp)
 # # debug print Target_file
 # $(info "debug print TARGET_file")
